@@ -1,0 +1,30 @@
+RewriteEngine on
+
+# Old ComicRank buttons
+RewriteRule ^view/([0-9]+)/([0-9]).(png|gif|jpg|blank)$ http://view.comicrank.com/1/0.$3 [L]
+RewriteRule ^view/([0-9]+)/([0-9]).(png|gif|jpg|blank)/([0-9]+)$ http://view.comicrank.com/1/0.$3 [L]
+RewriteRule ^view/([0-9]+).(png|gif|jpg|blank)$ http://view.comicrank.com/1/0.$2 [L]
+
+# Old ComicRank site
+RewriteRule ^([0-9]+)/in/?$ / [R=301,L]
+RewriteRule ^([0-9]+)/?$ - [G,L]
+RewriteRule ^(panel|top50|recent|movers) - [G,L]
+
+
+
+# New ComicRank site
+AddDefaultCharset UTF-8
+
+ErrorDocument 403 /rewrite/error.php?code=403
+ErrorDocument 404 /rewrite/error.php?code=404
+ErrorDocument 410 /rewrite/error.php?code=410
+ErrorDocument 500 /rewrite/error.php?code=500
+ErrorDocument 503 /rewrite/error.php?code=503
+
+RewriteRule \.git - [F,L]
+
+RewriteRule ^mailing/?$ /rewrite/mailing/index.php [L]
+RewriteRule ^mailing/([0-9a-z]{5,})/?$ /rewrite/mailing/manage.php?token=$1 [L]
+
+RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
+RewriteRule ^comic/([0-9a-z]{4})/(.+)/?$ /rewrite/comic/index.php?id=$1&title=$2 [L]

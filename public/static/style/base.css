@@ -1,0 +1,230 @@
+html, body {margin: 0; padding: 0; height: 100%; width: 100%;}
+body {
+	background: #fbfdff;
+	
+	font-size: 14px;
+	line-height: 20px;
+	color: #333;
+	
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+a {
+	color: #059;
+	text-decoration: none;
+}
+a img {
+	border: none 0;
+}
+a:hover {
+	color: #037;
+	text-decoration: underline;
+}
+a:active {
+	color: #086;
+}
+
+#headband {
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	
+	height: 124px;
+	background: #fff url(../images/headbackground.png);
+	box-shadow: 0 0 20px #05a;
+}
+#headband>div {
+	position: relative;
+	margin: 3px auto 0;
+	width: 798px;
+}
+#headband nav {
+	position: absolute;
+	top: 122px;
+	left: 35px;
+	right: 35px;
+}
+#headband nav ul {
+	margin: 0;
+	padding: 0;
+}
+#headband nav li {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+}
+#headband nav li a {
+	display: block;
+	padding: 0 15px;
+	font-size: 14px;
+	height: 22px;
+	line-height: 24px;
+	border-bottom: solid 2px #E4EDFC;
+}
+#headband nav li a:hover {
+	border-bottom-color: #037;
+	text-decoration: none;
+}
+
+
+#wrap {
+	min-height: 100%;
+	
+	width: 728px;
+	margin: 0 auto;
+	padding: 0;
+}
+#wrap>h1 {
+	margin: 0;
+	height: 153px;
+	visibility: hidden;	
+}
+
+
+
+
+
+
+section {
+	background: #fff;
+	border: solid 1px #E4EDFC;
+	padding: 0 25px 20px;
+	margin: 20px 0;
+	
+	font-size: 14px;
+	line-height: 1.5em;
+	color: #333;
+	
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	text-rendering: optimizeLegibility;
+}
+
+section header {
+	margin: 0 -25px 20px;
+	padding: 0 10px;
+	
+	border-bottom: solid 1px #E4EDFC;
+}
+
+section footer {
+	margin: 10px -20px 0;
+	padding: 0 10px;
+	
+	
+	font-size: 12px;
+}
+section footer p {
+	margin: 6px 0;
+}
+
+section h1 {
+	margin: 0;
+	padding: 13px 0 10px;
+	
+	font-size: 24px;
+	font-weight: normal;
+	color: #06a;
+}
+
+section h2 {
+	margin: 1.5em 0 1em;
+	padding: 0;
+	
+	font-size: 20px;
+	font-weight: normal;
+	color: #06a;
+}
+
+section p {
+	margin: 1em 0;
+}
+section ul, section ol {
+	margin: .5em 0;
+	padding: 0 0 0 2em;
+}
+section li {
+	margin: 0;
+	padding: 0 0 .5em;
+}
+
+section blockquote {
+	margin: 20px 20px;
+	padding: 5px;
+	border: solid 1px #ddd;
+	border-radius: 10px;
+}
+
+
+
+
+
+time {
+	white-space: nowrap;
+}
+
+
+
+form {
+	margin: 0 20px;
+}
+
+label {
+	display: block;
+	margin: .5em 0 0;
+}
+
+input {
+	margin: 3px 0 .5em;
+	border: solid 1px #aaa;
+}
+label input {
+	margin: 0;	
+}
+
+.big label {
+	font-size: 16px;
+}
+.big input {
+	padding: 5px;
+	font-size: 16px;
+	width: 300px;
+}
+.big input[type=checkbox],
+.big input[type=radio] {
+	width: auto;
+}
+
+.big button {
+	margin: 1em 0;
+	padding: 4px;
+	font-size: 16px;
+}
+
+
+
+table {
+	border-collapse: collapse;
+}
+thead th {
+	font-size: 13px;
+	line-height: 1.2em;
+}
+th, td {
+	padding: 0 .3em;
+}
+
+
+.sitelinks {
+	list-style: none;
+	margin-left: 0;
+	padding: 0;
+}
+.sitelinks li {
+	display: inline-block;
+	margin: .3em 1em;
+}
+.sitelinks img {
+	width: 16px;
+	height: 16px;
+}
