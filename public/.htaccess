@@ -28,4 +28,5 @@ RewriteRule ^mailing/([0-9a-z]{5,})/?$ /rewrite/mailing/manage.php?token=$1 [L]
 
 RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/in/?$ / [R=302,L]
+RewriteRule ^comic/([0-9a-z]{4})/stats/?$ /rewrite/comic/stats.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/(.+)/?$ /rewrite/comic/index.php?id=$1&title=$2 [L]
