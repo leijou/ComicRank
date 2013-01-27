@@ -14,7 +14,7 @@ $page->title = 'Mailing options';
 $page->displayHeader();
 ?>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>Mailing options</h1>
 	</header>

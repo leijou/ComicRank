@@ -9,7 +9,7 @@ $page->title = 'Comic Rank Roadmap';
 $page->displayHeader();
 ?>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>What we do</h1>
 	</header>
@@ -17,7 +17,7 @@ $page->displayHeader();
 	<p>This is a great way to boost ad revenue, track campaigns, and stay motivated to keep making comics! A lot of webcomic readers are silent most of the time but we're still there loving your work and supporting your comic.</p>
 </section>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>What has happened</h1>
 	</header>
@@ -25,7 +25,7 @@ $page->displayHeader();
 	<p>In September 2012 Comic Rank shut its doors while the new incarnation was being developed. Relaunched in January 2013, Comic Rank mostly survives off of the donations from users.</p>
 </section>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>What will happen</h1>
 	</header>

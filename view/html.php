@@ -50,7 +50,7 @@ class HTML extends HTTP {
 		if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
 		$this->headers['Location'] = $url;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Over here</h1>
 			</header>
@@ -65,7 +65,7 @@ class HTML extends HTTP {
 		if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
 		$this->headers['Location'] = $url;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Over here</h1>
 			</header>
@@ -78,7 +78,7 @@ class HTML extends HTTP {
 	public function exitForbidden() {
 		$this->statuscode = 403;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Forbidden</h1>
 			</header>
@@ -90,7 +90,7 @@ class HTML extends HTTP {
 	public function exitNotFound() {
 		$this->statuscode = 404;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Page not found</h1>
 			</header>
@@ -102,7 +102,7 @@ class HTML extends HTTP {
 	public function exitGone() {
 		$this->statuscode = 410;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Page no longer exists</h1>
 			</header>
@@ -114,7 +114,7 @@ class HTML extends HTTP {
 	public function exitInternalError() {
 		$this->statuscode = 500;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Internal error</h1>
 			</header>
@@ -127,7 +127,7 @@ class HTML extends HTTP {
 	public function exitUnavailable() {
 		$this->statuscode = 503;
 		$this->displayHeader();
-		echo '<section>
+		echo '<section class="sectionbox">
 			<header>
 				<h1>Service unavailable</h1>
 			</header>
