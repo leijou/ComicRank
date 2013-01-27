@@ -20,7 +20,7 @@ $page->title = $comic->title;
 $page->displayHeader();
 ?>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1><?=$comic->title('html')?></h1>
 	</header>

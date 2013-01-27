@@ -9,7 +9,7 @@ $page->title = 'Contact';
 $page->displayHeader();
 ?>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>Get in touch</h1>
 	</header>
@@ -17,7 +17,7 @@ $page->displayHeader();
 	<p>Or, you can email me at <a href="mailto:steve@comicrank.com">steve@comicrank.com</a></p>
 </section>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>Want to contribute?</h1>
 	</header>

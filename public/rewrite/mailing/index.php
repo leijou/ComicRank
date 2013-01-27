@@ -9,7 +9,7 @@ $page->title = 'Comic Rank mailing list';
 $page->displayHeader();
 ?>
 
-<section>
+<section class="sectionbox">
 	<header>
 		<h1>Mailing list</h1>
 	</header>
