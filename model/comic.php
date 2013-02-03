@@ -37,6 +37,32 @@ class Comic extends ORM {
 		return parent::set($field, $value);
 	}
 	
+	public function generateFullCode($format='raw') {
+		$r = '<!--Begin ComicRank button-->'."\n"
+		    .'<a href="http://www.comicrank.com/comic/'.$this->id('html').'/in" id="comicrank_button"><noscript><img src="http://stats.comicrank.com/v1/img/'.$this->id('html').'" alt="Visit Comic Rank" /></noscript></a>'."\n"
+		    .'<script>(function(){'."\n"
+		    .'var w=window,d=document,c,s;'."\n"
+		    .'function crl(){if(c)return;'."\n"
+		    .'c=d.getElementById("comicrank_button");'."\n"
+		    .'s=d.createElement("script");'."\n"
+		    .'s.async=true; s.src="http://stats.comicrank.com/v1/js/'.$this->id('url').'";'."\n"
+		    .'c.appendChild(s);}'."\n"
+		    .'if (w.attachEvent){'."\n"
+		    .'w.attachEvent("DOMContentLoaded",crl);'."\n"
+		    .'w.attachEvent("onload",crl);'."\n"
+		    .'}else{'."\n"
+		    .'w.addEventListener("DOMContentLoaded",crl,false);'."\n"
+		    .'w.addEventListener("load",crl,false);'."\n"
+		    .'}})();</script>'."\n"
+		    .'<!--End ComicRank button-->'."\n";
+		return \ComicRank\fmt($r, $format);
+	}
+	
+	public function generateBasicCode($format='raw') {
+		$r = '<a href="http://www.comicrank.com/comic/'.$this->id('html').'/in"><img src="http://stats.comicrank.com/v1/img/'.$this->id('html').'" alt="Visit Comic Rank" /></a>'."\n";
+		return \ComicRank\fmt($r, $format);
+	}
+	
 	public function insert() {
 		do {
 			$id = strtolower(base_convert(mt_rand(46656, 1679615), 10, 36));
