@@ -20,10 +20,12 @@ window.addEventListener('load',pw_load,false);}})();
 	</header>
 	
 	<div style="height: 90px; overflow: hidden;">
-		<div id="pw_adbox_67194_5_0"></div>
-		<noscript><map name="admap67194" id="admap67194"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=67194&amp;type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" rel="nofollow" /></map>
-		<table cellpadding="0" cellspacing="0" style="width:728px;border-style:none;background-color:;"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=67194&amp;type=5" style="width:728px;height:90px;border-style:none;" usemap="#admap67194" alt="" /></td></tr></table>
-		</noscript>
+		<div style="height: 90px;">
+			<div id="pw_adbox_67194_5_0"></div>
+			<noscript><map name="admap67194" id="admap67194"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=67194&amp;type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" rel="nofollow" /></map>
+			<table cellpadding="0" cellspacing="0" style="width:728px;border-style:none;background-color:;"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=67194&amp;type=5" style="width:728px;height:90px;border-style:none;" usemap="#admap67194" alt="" /></td></tr></table>
+			</noscript>
+		</div>
 		
 		<a href="http://www.comicrank.com/comic/c0a4/in" id="comicrank_button"><noscript><img src="http://stats.comicrank.com/v1/img/c0a4" alt="Visit Comic Rank" /></noscript></a>
 		<script>(function(){
