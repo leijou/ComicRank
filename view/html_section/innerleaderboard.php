@@ -24,5 +24,21 @@ window.addEventListener('load',pw_load,false);}})();
 		<noscript><map name="admap67194" id="admap67194"><area href="http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=67194&amp;type=5" shape="rect" coords="0,0,728,90" title="" alt="" target="_blank" rel="nofollow" /></map>
 		<table cellpadding="0" cellspacing="0" style="width:728px;border-style:none;background-color:;"><tr><td><img src="http://www.projectwonderful.com/nojs.php?id=67194&amp;type=5" style="width:728px;height:90px;border-style:none;" usemap="#admap67194" alt="" /></td></tr></table>
 		</noscript>
+		
+		<a href="http://www.comicrank.com/comic/c0a4/in" id="comicrank_button"><noscript><img src="http://stats.comicrank.com/v1/img/c0a4" alt="Visit Comic Rank" /></noscript></a>
+		<script>(function(){
+		var w=window,d=document,c,s;
+		function crl(){if(c)return;
+		c=d.getElementById("comicrank_button");
+		s=d.createElement("script");
+		s.async=true; s.src="http://stats.comicrank.com/v1/js/c0a4";
+		c.appendChild(s);}
+		if (w.attachEvent){
+		w.attachEvent("DOMContentLoaded",crl);
+		w.attachEvent("onload",crl);
+		}else{
+		w.addEventListener("DOMContentLoaded",crl,false);
+		w.addEventListener("load",crl,false);
+		}})();</script>
 	</div>
 </section>
