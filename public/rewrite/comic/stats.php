@@ -50,10 +50,11 @@ $stats = Model\ComicStats::getFromSQL('
     var data = new google.visualization.DataTable();
     data.addColumn('date', 'Date');
     data.addColumn('number', 'Readers');
+    data.addColumn('number', 'Unique Visitors');
     data.addRows([
     	<?php
     	foreach ($stats as $k => $stat) {
-    		echo '[new Date('.$stat->date('Y').', '.($stat->date('m')-1).', '.$stat->date('d').'), '.$stat->readers('int').']';
+    		echo '[new Date('.$stat->date('Y').', '.($stat->date('m')-1).', '.$stat->date('d').'), '.$stat->readers('int').', '.$stat->guests('int').']';
     		if ($k < count($stats)-1) echo ',';
     	}
     	?>
@@ -80,6 +81,7 @@ $stats = Model\ComicStats::getFromSQL('
 			
 			<h2 style="text-align: center;">Guests</h2>
 			<p style="font-size: 24px; text-align: center;"><?=$comic->guests('int')?></p>
+			<p style="font-size: 12px; text-align: center; margin-top: -20px;">(Unique visitors over the past 24 hours)</p>
 		</div>
 	</div>
 	
