@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-0": {
+            "ComicRank": "lib",
+            "Leijou": "lib"
+        }
+    },
+    "require": {
+        "ircmaxell/password-compat": "dev-master"
+    }
+}
