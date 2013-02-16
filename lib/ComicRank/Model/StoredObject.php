@@ -138,8 +138,6 @@ abstract class StoredObject
      */
     protected function set($field, $value)
     {
-        $value = $this->validate($field, $validate);
-
         // Mark the field as changed and note the original value
         if (!array_key_exists($field, $this->_changes)) {
             $this->_changes[$field] = $this->_container[$field];
