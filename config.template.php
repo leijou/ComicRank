@@ -10,3 +10,13 @@ define('MYSQL_HOST', '');
 define('MYSQL_USER', '');
 define('MYSQL_PASSWORD', '');
 define('MYSQL_DATABASE', '');
+
+define('SMTP_SERVER', '');
+define('SMTP_PORT', '');
+define('SMTP_TRANSPORT', '');
+
+define('SMTP_NOREPLY_USER', '');
+define('SMTP_NOREPLY_PASSWORD', '');
+
+define('SMTP_STEVE_USER', '');
+define('SMTP_STEVE_PASSWORD', '');
