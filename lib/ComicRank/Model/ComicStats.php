@@ -7,12 +7,27 @@ namespace ComicRank\Model;
  */
 class ComicStats extends StoredObject
 {
-    protected static $_table = 'comicstats';
-    protected static $_primarykey = array('comic','date');
-    protected static $_fields = array(
-        'comic'=>array('readonly','string',null),
-        'date'=>array('readonly','date',null),
-        'readers'=>array('readonly','int',0),
-        'guests'=>array('readonly','int',0),
+    protected static $table = 'comicstats';
+    protected static $table_fields = array(
+        'comic'   => array('string', null),
+        'date'    => array('date',   null),
+        'readers' => array('int',    0),
+        'guests'  => array('int',    0),
     );
+    protected static $table_primarykey = array('comic','date');
+
+    public function insert()
+    {
+        throw new \BadMethodCallException('ComicStats are read-only');
+    }
+
+    public function update()
+    {
+        throw new \BadMethodCallException('ComicStats are read-only');
+    }
+
+    public function delete()
+    {
+        throw new \BadMethodCallException('ComicStats are read-only');
+    }
 }

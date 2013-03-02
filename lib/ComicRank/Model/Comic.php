@@ -3,25 +3,30 @@ namespace ComicRank\Model;
 
 class Comic extends StoredObject
 {
-    protected static $_table = 'comics';
-    protected static $_primarykey = array('id');
-    protected static $_fields = array(
-        'id'=>array('readonly','string',null),
-        'added'=>array('readonly','time',null),
-        'url'=>array('public','url',''),
-        'title'=>array('public','string',''),
-        'nsfw'=>array('public','bool',0),
-        'public'=>array('public','bool',1),
-        'email'=>array('public','email',''),
-        'accesscode'=>array('protected','string',null),
-        'readers'=>array('protected','int',0),
-        'guests'=>array('protected','int',0),
+    protected static $table = 'comics';
+    protected static $table_fields = array(
+        'id'      => array('string', null),
+        'added'   => array('time',   null),
+        'user'    => array('int',    0),
+        'url'     => array('string', '',),
+        'title'   => array('string', '',),
+        'nsfw'    => array('bool',   0),
+        'public'  => array('bool',   1),
+        'readers' => array('int',    0),
+        'guests'  => array('int',    0),
     );
+    protected static $table_primarykey = array('id');
 
     public static function getFromId($id)
     {
         if (strlen($id) != 4) return false;
         return static::getSingleFromSQL('SELECT * FROM comics WHERE id = :id', array(':id'=>$id));
+    }
+
+    public static function getFromUser($user)
+    {
+        if (!$user) return false;
+        return static::getFromSQL('SELECT * FROM comics WHERE user = :user', array(':user'=>$user));
     }
 
     public function generateFullCode($format='raw')
@@ -54,6 +59,27 @@ class Comic extends StoredObject
         return fmt($r, $format);
     }
 
+    public function validate() {
+        parent::validate();
+
+        if (!$this->url) {
+            $this->validation_errors['url'] = 'No URL defined';
+        } else {
+            if (!strpos($this->url, '://')) $this->url = 'http://'.$this->url;
+            if (!filter_var($this->url, FILTER_VALIDATE_URL)) {
+                $this->validation_errors['url'] = 'Invalid URL';
+            } elseif (!in_array(substr($this->url, 0, 7), array('http://','https:/'))) {
+                $this->validation_errors['url'] = 'URL must be HTTP or HTTPS';
+            }
+        }
+
+        if (!$this->title) {
+            $this->validation_errors['title'] = 'No title defined';
+        }
+
+        return !count($this->validation_errors);
+    }
+
     public function insert()
     {
         do {
@@ -63,7 +89,7 @@ class Comic extends StoredObject
 
         $this->set('id', $id);
         $this->set('added', new \DateTime);
-        $this->set('accesscode', str_replace(range(0,9), range('Q','Z'), strtoupper(base_convert(mt_rand(1, 9999999999999), 10, 26))));
+        $this->set('accesscode', str_replace(range(0, 9), range('Q', 'Z'), strtoupper(base_convert(mt_rand(1, 9999999999999), 10, 26))));
 
         return parent::insert();
     }

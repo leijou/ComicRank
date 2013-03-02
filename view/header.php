@@ -1,12 +1,12 @@
 <!doctype html>
 <html>
 <head>
-    <title><?=htmlspecialchars($this->title)?></title>
+    <title><?=htmlspecialchars($page->title)?></title>
     <link rel="publisher" href="https://plus.google.com/108661948674027877061" />
     <?php
-        if ($this->author) echo '<link rel="author" href="'.htmlspecialchars($this->author).'" />';
-        if ($this->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($this->canonical).'" />';
-        foreach ($this->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />';
+        if ($page->author) echo '<link rel="author" href="'.htmlspecialchars($page->author).'" />';
+        if ($page->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($page->canonical).'" />';
+        foreach ($page->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />';
     ?>
 
     <script>

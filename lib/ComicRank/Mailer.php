@@ -40,9 +40,6 @@ class Mailer
 
     private static function send(\Swift_Mailer $mailer, \Swift_Message $message)
     {
-        var_dump($message->getTo());
-        return 0;
-
         $failures = array();
         $r = $mailer->send($message, $failures);
         static::$failures = array_merge(static::$failures, $failures);
