@@ -7,6 +7,7 @@ class HTML extends HTTP
     public $canonical = null;
     public $author = null;
     public $css = array();
+    public $js = array();
 
     public function __construct()
     {

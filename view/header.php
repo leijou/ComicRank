@@ -4,9 +4,10 @@
     <title><?=htmlspecialchars($page->title)?></title>
     <link rel="publisher" href="https://plus.google.com/108661948674027877061" />
     <?php
-        if ($page->author) echo '<link rel="author" href="'.htmlspecialchars($page->author).'" />';
-        if ($page->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($page->canonical).'" />';
-        foreach ($page->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />';
+    if ($page->author) echo '<link rel="author" href="'.htmlspecialchars($page->author).'" />'."\n    ";
+    if ($page->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($page->canonical).'" />'."\n    ";
+    foreach ($page->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />'."\n    ";
+    foreach ($page->js as $js) echo '<script src="'.htmlspecialchars($js).'"></script>'."\n    ";
     ?>
 
     <script>

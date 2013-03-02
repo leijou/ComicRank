@@ -5,7 +5,7 @@ class User extends StoredObject
 {
     protected static $table = 'users';
     protected static $table_fields = array(
-        'id'       => array('autoid', null),
+        'id'       => array('string', null),
         'added'    => array('time',   null),
         'email'    => array('email',  ''),
         'password' => array('string', ''),
@@ -17,6 +17,12 @@ class User extends StoredObject
     {
         if (!$id) return false;
         return static::getSingleFromSQL('SELECT * FROM users WHERE id = :id', array(':id'=>$id));
+    }
+
+    public static function getFromEmail($email)
+    {
+        if (!$email) return false;
+        return static::getSingleFromSQL('SELECT * FROM users WHERE email = :email', array(':email'=>$email));
     }
 
     protected function set($field, $value)
@@ -56,6 +62,12 @@ class User extends StoredObject
 
     public function insert()
     {
+        do {
+            $id = strtolower(base_convert(mt_rand(46656, 1679615), 10, 36));
+            $existing = User::getFromId($id);
+        } while ($existing);
+
+        $this->set('id', $id);
         $this->set('added', new \DateTime);
 
         return parent::insert();

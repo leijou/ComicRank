@@ -7,7 +7,7 @@ class Comic extends StoredObject
     protected static $table_fields = array(
         'id'      => array('string', null),
         'added'   => array('time',   null),
-        'user'    => array('int',    0),
+        'user'    => array('string', null),
         'url'     => array('string', '',),
         'title'   => array('string', '',),
         'nsfw'    => array('bool',   0),
@@ -89,7 +89,6 @@ class Comic extends StoredObject
 
         $this->set('id', $id);
         $this->set('added', new \DateTime);
-        $this->set('accesscode', str_replace(range(0, 9), range('Q', 'Z'), strtoupper(base_convert(mt_rand(1, 9999999999999), 10, 26))));
 
         return parent::insert();
     }
