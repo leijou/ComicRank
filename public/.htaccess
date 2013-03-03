@@ -23,10 +23,15 @@ ErrorDocument 503 /rewrite/error.php?code=503
 
 RewriteRule \.git - [F,L]
 
-RewriteRule ^mailing/?$ /rewrite/mailing/index.php [L]
-RewriteRule ^mailing/([0-9a-z]{5,})/?$ /rewrite/mailing/manage.php?token=$1 [L]
-
 RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/in/?$ / [R=302,L]
 RewriteRule ^comic/([0-9a-z]{4})/stats/?$ /rewrite/comic/stats.php?id=$1 [L]
+RewriteRule ^comic/([0-9a-z]{4})/code/?$ /rewrite/comic/code.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/(.+)/?$ /rewrite/comic/index.php?id=$1&title=$2 [L]
+
+RewriteRule ^user/([0-9a-z]{4})/?$ /rewrite/user/index.php?id=$1 [L]
+RewriteRule ^user/([0-9a-z]{4})/edit/?$ /rewrite/user/edit.php?id=$1 [L]
+RewriteRule ^user/([0-9a-z]{4})/(.+)/?$ /rewrite/user/index.php?id=$1&name=$2 [L]
+
+RewriteRule ^mailing/?$ /rewrite/mailing/index.php [L]
+RewriteRule ^mailing/([0-9a-z]{5,})/?$ /rewrite/mailing/manage.php?token=$1 [L]

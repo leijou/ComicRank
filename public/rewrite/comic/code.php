@@ -16,9 +16,9 @@ if (!$comic) {
     exit;
 }
 
-$page->canonical = '/comic/'.$comic->id('url').'/stats';
+$page->canonical = '/comic/'.$comic->id('url').'/code';
 
-$page->title = 'Stats: '.$comic->title;
+$page->title = 'Code: '.$comic->title;
 
 if ( (!$page->getUser()) || ($page->getUser()->id != $comic->user) ) {
     $page->statuscode = 403;
@@ -28,15 +28,6 @@ if ( (!$page->getUser()) || ($page->getUser()->id != $comic->user) ) {
     exit;
 }
 
-$page->js[] = 'http://www.google.com/jsapi';
-
 $page->displayHeader();
-
-$stats = Model\ComicStats::getFromSQL('
-    SELECT * FROM comicstats
-    WHERE `comic` = :comic AND
-        `date` >= (UTC_DATE() - INTERVAL 9 WEEK)
-    ORDER BY `date` ASC', array(':comic'=>$comic->id));
-
-$page->display('comic-stats', array('comic'=>$comic, 'stats'=>$stats));
+$page->display('comic-code', array('comic'=>$comic));
 $page->displayFooter();

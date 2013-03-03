@@ -6,16 +6,17 @@ namespace ComicRank\Model;
  */
 abstract class StoredObject
 {
-    protected static $_table = '';
-    protected static $_primarykey = array();
-    protected static $_fields = array();
+    protected static $table = '';
+    protected static $table_primarykey = array();
+    protected static $table_fields = array();
 
-    private $_container = array();
-    private $_changes = array();
+    private $field_container = array();
+    private $field_changes = array();
 
-    const FIELD_SCOPE = 0;
-    const FIELD_TYPE = 1;
-    const FIELD_DEFAULT = 2;
+    protected $validation_errors = null;
+
+    const FIELD_FORMAT = 0;
+    const FIELD_DEFAULT = 1;
 
     /**
      * Execute and fetch all rows
@@ -23,7 +24,7 @@ abstract class StoredObject
      * @param  mixed[string] $bind
      * @return static[]
      */
-    public static function getFromSQL($sql, array $bind=null)
+    public static function getFromSQL($sql, array $bind = null)
     {
         return static::getFromStatement(\ComicRank\Database::query($sql, $bind));
     }
@@ -34,7 +35,7 @@ abstract class StoredObject
      * @param  mixed[string] $bind
      * @return static|bool
      */
-    public static function getSingleFromSQL($sql, array $bind=null)
+    public static function getSingleFromSQL($sql, array $bind = null)
     {
         return static::getNextFromStatement(\ComicRank\Database::query($sql, $bind));
     }
@@ -72,11 +73,11 @@ abstract class StoredObject
      */
     public function __construct(array $row = array())
     {
-        foreach (static::$_fields as $field => $details) {
+        foreach (static::$table_fields as $field => $details) {
             if (array_key_exists($field, $row)) {
-                $this->_container[$field] = $row[$field];
+                $this->field_container[$field] = $row[$field];
             } else {
-                $this->_container[$field] = $details[self::FIELD_DEFAULT];
+                $this->field_container[$field] = $details[self::FIELD_DEFAULT];
             }
         }
     }
@@ -89,11 +90,13 @@ abstract class StoredObject
      */
     public function __get($field)
     {
-        if (!array_key_exists($field, $this->_container)) {
+        if ($field == 'validation_errors') return $this->validation_errors;
+
+        if (!array_key_exists($field, $this->field_container)) {
             throw new \OutOfRangeException('Field or attribute '.$field.' does not exists');
         }
 
-        return $this->_container[$field];
+        return $this->field_container[$field];
     }
 
     /**
@@ -105,10 +108,10 @@ abstract class StoredObject
      */
     public function __call($field, $args)
     {
-        if (!array_key_exists($field, $this->_container)) {
+        if (!array_key_exists($field, $this->field_container)) {
             throw new \BadMethodCallException('Method or field '.$field.' does not exists');
         }
-        array_unshift($args, $this->_container[$field]);
+        array_unshift($args, $this->__get($field));
 
         return call_user_func_array('fmt', $args);
     }
@@ -122,14 +125,12 @@ abstract class StoredObject
      */
     public function __set($field, $value)
     {
-        if (!array_key_exists($field, static::$_fields)) {
+        if (!array_key_exists($field, static::$table_fields)) {
             throw new \OutOfRangeException('Field or attribute '.$field.' does not exists');
-        }
-        if (static::$_fields[$field][self::FIELD_SCOPE] == 'readonly') {
-            throw new \OutOfRangeException('Field '.$field.' is read only');
         }
         $this->set($field, $value);
     }
+
     /**
      * Allow setting of any fields (only available in class scope)
      * Handles the formatting of input depedant on field type
@@ -139,36 +140,37 @@ abstract class StoredObject
     protected function set($field, $value)
     {
         // Mark the field as changed and note the original value
-        if (!array_key_exists($field, $this->_changes)) {
-            $this->_changes[$field] = $this->_container[$field];
+        if (!array_key_exists($field, $this->field_changes)) {
+            $this->field_changes[$field] = $this->field_container[$field];
         }
 
         // Format the value as a storable value
-        if ($value !== null) switch (static::$_fields[$field][self::FIELD_TYPE]) {
-            case 'bool': $value = ($value?1:0); break;
-            case 'password': $value = $value->getHash(); break;
-            case 'time': $value = $value->format('Y-m-d H:i:s'); break;
-            case 'date': $value = $value->format('Y-m-d'); break;
+        if ($value !== null) switch (static::$table_fields[$field][self::FIELD_FORMAT]) {
+            case 'bool':
+                $value = ($value?1:0);
+                break;
+
+            case 'time':
+                if (!$value instanceof \DateTime) throw new \InvalidArgumentException('Value for time must be a DateTime instance');
+                $value = $value->format('Y-m-d H:i:s');
+                break;
+
+            case 'date':
+                if (!$value instanceof \DateTime) throw new \InvalidArgumentException('Value for date must be a DateTime instance');
+                $value = $value->format('Y-m-d');
+                break;
         }
 
-        $this->_container[$field] = $value;
+        $this->field_container[$field] = $value;
     }
 
     /**
-     * Attempt to set all fields that are publicly editable
-     * Silently fail to set any uneditable fields
-     * @param mixed[string] $values
+     *
      */
-    public function setPublic($values)
-    {
-        foreach ($values as $field => $value) {
-            if (
-                (array_key_exists($field, static::$_fields)) &&
-                (static::$_fields[$field][self::FIELD_SCOPE] == 'public')
-            ) {
-                $this->set($field, $value);
-            }
-        }
+    public function validate() {
+        $this->validation_errors = array();
+
+        return true;
     }
 
     /**
@@ -176,23 +178,28 @@ abstract class StoredObject
      */
     public function insert()
     {
+        if ($this->validation_errors === null) $this->validate();
+        if (count($this->validation_errors)) {
+            throw new \RuntimeException('Unresolved validation errors on insert');
+        }
+
         $bind = array();
 
         // Fetch all fields
         $set = array();
-        foreach (static::$_fields as $field => $details) {
+        foreach (static::$table_fields as $field => $details) {
             $set[] = '`'.$field.'`=?';
-            $bind[] = $this->_container[$field];
+            $bind[] = $this->field_container[$field];
         }
         if (!count($set)) return;
 
-        $sql = 'INSERT INTO `'.static::$_table.'` SET '.implode($set,', ');
+        $sql = 'INSERT INTO `'.static::$table.'` SET '.implode($set,', ');
         \ComicRank\Database::query($sql, $bind);
 
         // Populate autoID field if there is one
-        foreach (static::$_fields as $field => $details) {
-            if ($details[self::FIELD_TYPE] == 'autoid') {
-                $this->_container[$field] = \ComicRank\Database::lastInsertId();
+        foreach (static::$table_fields as $field => $details) {
+            if ($details[self::FIELD_FORMAT] == 'autoid') {
+                $this->field_container[$field] = \ComicRank\Database::lastInsertId();
                 break;
             }
         }
@@ -203,30 +210,35 @@ abstract class StoredObject
      */
     public function update()
     {
+        if ($this->validation_errors === null) $this->validate();
+        if (count($this->validation_errors)) {
+            throw new \RuntimeException('Unresolved validation errors on update');
+        }
+
         $bind = array();
 
         // Fetch updated fields
         $set = array();
-        foreach ($this->_changes as $field => $oldvalue) {
-            if ($this->_container[$field] !== $oldvalue) {
+        foreach ($this->field_changes as $field => $oldvalue) {
+            if ($this->field_container[$field] !== $oldvalue) {
                 $set[] = '`'.$field.'`=?';
-                $bind[] = $this->_container[$field];
+                $bind[] = $this->field_container[$field];
             }
         }
         if (!count($set)) return;
 
         // Construct primary key where statement
         $where = array();
-        foreach (static::$_primarykey as $field) {
+        foreach (static::$table_primarykey as $field) {
             $where[] = '`'.$field.'`=?';
-            if (array_key_exists($field, $this->_changes)) {
-                $bind[] = $this->_changes[$field];
+            if (array_key_exists($field, $this->field_changes)) {
+                $bind[] = $this->field_changes[$field];
             } else {
-                $bind[] = $this->_container[$field];
+                $bind[] = $this->field_container[$field];
             }
         }
 
-        $sql = 'UPDATE `'.static::$_table.'` SET '.implode($set,', ').' WHERE '.implode($where, ' AND ');
+        $sql = 'UPDATE `'.static::$table.'` SET '.implode($set,', ').' WHERE '.implode($where, ' AND ');
         \ComicRank\Database::query($sql, $bind);
     }
 
@@ -239,16 +251,16 @@ abstract class StoredObject
 
         // Construct primary key where statement
         $where = array();
-        foreach (static::$_primarykey as $field) {
+        foreach (static::$table_primarykey as $field) {
             $where[] = '`'.$field.'`=?';
-            if (array_key_exists($field, $this->_changes)) {
-                $bind[] = $this->_changes[$field];
+            if (array_key_exists($field, $this->field_changes)) {
+                $bind[] = $this->field_changes[$field];
             } else {
-                $bind[] = $this->_container[$field];
+                $bind[] = $this->field_container[$field];
             }
         }
 
-        $sql = 'DELETE FROM `'.static::$_table.'` WHERE '.implode($where, ' AND ');
+        $sql = 'DELETE FROM `'.static::$table.'` WHERE '.implode($where, ' AND ');
         \ComicRank\Database::query($sql, $bind);
     }
 }

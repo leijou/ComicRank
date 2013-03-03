@@ -3,13 +3,14 @@ namespace ComicRank\Model;
 
 class Mailing extends StoredObject
 {
-    protected static $_table = 'mailing';
-    protected static $_primarykey = array('email');
-    protected static $_fields = array(
-        'email'=>array('public','string',null),
-        'added'=>array('readonly','time',null),
-        'token'=>array('readonly','string',null),
+    protected static $table = 'mailing';
+    protected static $table_fields = array(
+        'email'     => array('string', null),
+        'added'     => array('time',   null),
+        'token'     => array('string', null),
+        'requester' => array('double', null),
     );
+    protected static $table_primarykey = array('email');
 
     public static function getFromEmail($email)
     {
@@ -23,15 +24,16 @@ class Mailing extends StoredObject
         return static::getSingleFromSQL('SELECT * FROM mailing WHERE token = :token', array(':token'=>$token));
     }
 
-    protected function set($field, $value)
-    {
-        switch ($field) {
-            case 'email':
-                if (preg_match('/^[^@]*[^\.]*$/', $value)) throw new \UnexpectedValueException('Invalid format for email address');
-                break;
+    public function validate() {
+        parent::validate();
+
+        if (!$this->email) {
+            $this->validation_errors['email'] = 'No email address defined';
+        } elseif (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->validation_errors['email'] = 'Invalid email address';
         }
 
-        return parent::set($field, $value);
+        return !count($this->validation_errors);
     }
 
     public function insert()
@@ -43,6 +45,7 @@ class Mailing extends StoredObject
 
         $this->set('added', new \DateTime);
         $this->set('token', $token);
+        if (!$this->requester) $this->set('requester', ip2long($_SERVER['REMOTE_ADDR']));
 
         return parent::insert();
     }

@@ -6,6 +6,7 @@
         }
     },
     "require": {
-        "ircmaxell/password-compat": "dev-master"
+        "ircmaxell/password-compat": "dev-master",
+        "swiftmailer/swiftmailer": "v4.3.0"
     }
 }

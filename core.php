@@ -42,10 +42,11 @@ function fmt($value, $format)
         case 'double': return (double) $value;
         case 'currency': return ($extra?$extra:'').number_format($value);
         case 'posessive': return $value.'’'.(substr($value, -1)=='s'?'':'s');
+        case 'datetime': return new DateTime($value);
 
         // Catch unknown formatters and assume they are date formats
         default:
-            if (!is_numeric($value)) $value = strtotime($value);
-            return date($format, $value);
+            $value = new DateTime($value);
+            return $value->format($format);
     }
 }

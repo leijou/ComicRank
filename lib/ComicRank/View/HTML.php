@@ -7,6 +7,7 @@ class HTML extends HTTP
     public $canonical = null;
     public $author = null;
     public $css = array();
+    public $js = array();
 
     public function __construct()
     {
@@ -21,16 +22,18 @@ class HTML extends HTTP
     {
         $this->outputHeaders();
 
-        include(PATH_BASE.'/view/header.php');
+        $this->display('header');
     }
 
     public function displayFooter()
     {
-        echo '
-                <div style="height: 20px;"></div>
-            </div>
-        </body>
-        </html>';
+        $this->display('footer');
+    }
+
+    public function display($id, array $view = array())
+    {
+        $page = $this;
+        include(PATH_BASE.'/view/'.$id.'.php');
     }
 
     public function displayInnerLeaderboard()
