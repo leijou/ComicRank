@@ -7,6 +7,7 @@ abstract class HTTP
     public $headers;
 
     const AUTH_COOKIE = 'crauth';
+    const CSRF_COOKIE = 'rfp';
     private $session = false;
     private $user = null;
 
@@ -37,6 +38,18 @@ abstract class HTTP
             }
             setcookie(self::AUTH_COOKIE, $_COOKIE[self::AUTH_COOKIE], time()+31449600, '/', null, false, true);
         }
+
+        // Add CSRF cookie
+        if (!isset($_COOKIE[self::CSRF_COOKIE])) $this->getCSRF();
+        setcookie(self::CSRF_COOKIE, $_COOKIE[self::CSRF_COOKIE], time()+31449600, '/');
+    }
+
+    public function getCSRF()
+    {
+        if (!isset($_COOKIE[self::CSRF_COOKIE])) {
+            $_COOKIE[self::CSRF_COOKIE] = sha1(mt_rand());
+        }
+        return $_COOKIE[self::CSRF_COOKIE];
     }
 
     public function setSessionUser(\ComicRank\Model\User $user)

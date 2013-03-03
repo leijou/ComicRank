@@ -5,6 +5,9 @@
             </header>
 
             <form method="post" class="big">
+                <input type="hidden" name="csrf" value="<?=$page->getCSRF()?>" />
+                <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
+
                 <?=(isset($view['completions']['name'])?'<p style="color: green">'.fmt($view['completions']['name'], 'html').'</p>':'')?>
                 <?=(isset($view['errors']['name'])?'<p style="color: red">'.fmt($view['errors']['name'], 'html').'</p>':'')?>
                 <input type="text" name="name" value="<?=$view['user']->name('html')?>" required />
@@ -18,6 +21,9 @@
             </header>
 
             <form method="post" class="big">
+                <input type="hidden" name="csrf" value="<?=$page->getCSRF()?>" />
+                <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
+
                 <?=(isset($view['completions']['password'])?'<p style="color: green">'.fmt($view['completions']['password'], 'html').'</p>':'')?>
                 <?=(isset($view['errors']['password'])?'<p style="color: red">'.fmt($view['errors']['password'], 'html').'</p>':'')?>
                 <input type="password" name="password" placeholder="Current Password" required /><br />
