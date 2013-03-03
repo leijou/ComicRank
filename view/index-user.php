@@ -15,6 +15,8 @@
                     <dd><?=$comic->guests('int')?> in the last 24 hours</dd>
                 </dl>
                 <a href="/comic/<?=$comic->id('url')?>/stats">Stats</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="/comic/<?=$comic->id('url')?>/code">Code</a>
                 <?php
             }
             ?>
