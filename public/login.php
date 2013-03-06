@@ -35,8 +35,8 @@ $page->displayHeader();
         <?=(isset($errors['csrf'])?'<p style="color: red">'.fmt($errors['csrf'], 'html').'</p>':'')?>
 
         <?=(isset($errors['auth'])?'<p style="color: red">'.fmt($errors['auth'], 'html').'</p>':'')?>
-        <input type="email" name="email" placeholder="Your email address" required />
-        <input type="password" name="password" placeholder="Your password" required />
+        <input type="email" name="email" placeholder="Your email address" required /><br />
+        <input type="password" name="password" placeholder="Your password" required /><br />
         <button type="submit">Log In</button>
     </form>
 

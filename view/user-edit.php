@@ -10,7 +10,7 @@
 
                 <?=(isset($view['completions']['name'])?'<p style="color: green">'.fmt($view['completions']['name'], 'html').'</p>':'')?>
                 <?=(isset($view['errors']['name'])?'<p style="color: red">'.fmt($view['errors']['name'], 'html').'</p>':'')?>
-                <input type="text" name="name" value="<?=$view['user']->name('html')?>" required />
+                <input type="text" name="name" value="<?=$view['user']->name('html')?>" required /><br />
                 <button type="submit" name="edit">Save Changes</button>
             </form>
         </section>

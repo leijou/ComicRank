@@ -3,6 +3,8 @@
 <head>
     <title><?=htmlspecialchars($page->title)?></title>
     <link rel="publisher" href="https://plus.google.com/108661948674027877061" />
+
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1" />
     <?php
     if ($page->author) echo '<link rel="author" href="'.htmlspecialchars($page->author).'" />'."\n    ";
     if ($page->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($page->canonical).'" />'."\n    ";
@@ -22,17 +24,12 @@
     </script>
 </head>
 <body>
-    <header id="headband">
-        <div>
-            <a href="/"><img src="<?=URL_STATIC?>/images/heading.png" alt=""></a>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about.php">About</a></li>
-                    <li><a href="/contact.php">Contact</a></li>
-                </ul>
-            </nav>
+    <header id="siteheader">
+        <div class="contentwrap">
+            <a href="/" id="siteheaderlink"><img src="<?=URL_STATIC?>/images/heading.png" alt=""></a>
+
+            <p style="color: #06a; font-size: 19px; line-height: 1.5em;">Comic Rank provides a service which tracks the readers of webcomics and tells you how many real people frequently read your comic. No vote-begging required.</p>
         </div>
     </header>
-    <div id="wrap">
-        <h1>Comic Rank</h1>
+
+    <div id="sitecontent">

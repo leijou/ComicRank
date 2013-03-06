@@ -26,22 +26,20 @@
                 <h1>Stats: <?=$view['comic']->title('html')?></h1>
             </header>
 
-            <div class="section_grid">
-                <div class="twothirds">
-                    <div id="chart_div" style="width: 100%; height: 300px;">
-                    </div>
+            <div class="contentwrap">
+                <div id="chart_div" style="width: 100%; height: 300px;">
                 </div>
-                <div class="third">
-                    <h2 style="text-align: center;">Readers</h2>
-                    <p style="font-size: 24px; text-align: center;"><?=$view['comic']->readers('int')?></p>
 
-                    <h2 style="text-align: center;">Guests</h2>
-                    <p style="font-size: 24px; text-align: center;"><?=$view['comic']->guests('int')?></p>
-                    <p style="font-size: 12px; text-align: center; margin-top: -20px;">(Unique visitors over the past 24 hours)</p>
+                <div style="float: left; width: 50%; text-align: center;">
+                    <h2>Readers</h2>
+                    <p style="font-size: 24px;"><?=$view['comic']->readers('int')?></p>
                 </div>
+
+                <div style="float: left; width: 50%; text-align: center;">
+                    <h2>Guests</h2>
+                    <p style="font-size: 24px;"><?=$view['comic']->guests('int')?></p>
+                    <p style="font-size: 12px; margin-top: -20px;">(Unique visitors over the past 24 hours)</p>
+                </div>
+
             </div>
-
-            <footer>
-                <p>A maximum of 9 weeks history can be displayed here.</p>
-            </footer>
         </section>
