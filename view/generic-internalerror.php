@@ -1,10 +1,10 @@
 
         <section class="sectionbox">
             <header>
-                <h1><?=$view['user']->name('html')?></h1>
+                <h1>Internal error</h1>
             </header>
 
             <div class="contentwrap">
-                <p>More info to come</p>
+                <p>Something went wrong. It's probably our fault ☹</p>
             </div>
         </section>

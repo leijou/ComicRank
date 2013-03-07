@@ -8,12 +8,7 @@ $page = new View\HTML;
 if (!isset($_GET['id'])) $page->exitNotFound();
 $comic = Model\Comic::getFromId($_GET['id']);
 if (!$comic) {
-    $page->title = 'Comic not found';
-    $page->statuscode = 404;
-    $page->displayHeader();
-    $page->display('comic-not-found');
-    $page->displayFooter();
-    exit;
+    $page->exitPageDisplay(404, 'comic-not-found');
 }
 
 $page->canonical = '/comic/'.$comic->id('url').'/'.$comic->title('url');
