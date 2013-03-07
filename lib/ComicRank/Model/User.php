@@ -10,6 +10,7 @@ class User extends StoredObject
         'email'    => array('email',  ''),
         'password' => array('string', ''),
         'name'     => array('string', ''),
+        'admin'    => array('bool', 0),
     );
     protected static $table_primarykey = array('id');
 

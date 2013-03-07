@@ -13,7 +13,7 @@ if (!$comic) {
 
 $page->canonical = '/comic/'.$comic->id('url').'/code';
 
-if ( (!$page->getUser()) || ($page->getUser()->id != $comic->user) ) {
+if ( (!$page->getUser()) || ( ($page->getUser()->id != $comic->user) && (!$page->getUser()->admin)) ) {
     $page->exitPageDisplay(403, 'comic-not-authorized');
 }
 
