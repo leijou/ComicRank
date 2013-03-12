@@ -22,5 +22,4 @@ $page->title = 'User: '.$user->name;
 
 $page->displayHeader();
 $page->display('user-view', array('user'=>$user));
-$page->display('innerleaderboard');
 $page->displayFooter();

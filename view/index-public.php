@@ -1,4 +1,12 @@
 
+        <div style="margin-top: -20px;">
+            <div class="sectionbox">
+                <div class="contentwrap">
+                    <p style="color: #06a; font-size: 19px; line-height: 1.6em;">Comic Rank provides a service which tracks the readers of webcomics and tells you how many real people frequently read your comic. No vote-begging required.</p>
+                </div>
+            </div>
+        </div>
+
         <section class="sectionbox">
             <header>
                 <h1>Closed Beta</h1>

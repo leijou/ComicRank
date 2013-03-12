@@ -9,7 +9,15 @@
             data.addColumn('number', 'Unique Visitors');
             data.addRows([
                 <?php
+                $prevstat = null;
                 foreach ($view['stats'] as $k => $stat) {
+                    // If day has been missed out in log flatline until next reading
+                    if ( ($prevstat) && ($stat->date('datetime')->diff($prevstat->date('datetime'))->d > 1) ) {
+                        $prevday = $stat->date('datetime')->sub(new \DateInterval('P1D'));
+                        echo '[new Date('.$prevday->format('Y').', '.($prevday->format('m')-1).', '.$prevday->format('d').'), '.$prevstat->readers('int').', '.$prevstat->guests('int').'],';
+                    }
+                    $prevstat = $stat;
+
                     echo '[new Date('.$stat->date('Y').', '.($stat->date('m')-1).', '.$stat->date('d').'), '.$stat->readers('int').', '.$stat->guests('int').']';
                     if ($k < count($view['stats'])-1) echo ',';
                 }
@@ -27,8 +35,6 @@
             </header>
 
             <div class="contentwrap">
-                <div id="chart_div" style="width: 100%; height: 300px;">
-                </div>
 
                 <div style="float: left; width: 50%; text-align: center;">
                     <h2>Readers</h2>
@@ -36,9 +42,12 @@
                 </div>
 
                 <div style="float: left; width: 50%; text-align: center;">
-                    <h2>Guests</h2>
+                    <h2>People today</h2>
                     <p style="font-size: 24px;"><?=$view['comic']->guests('int')?></p>
-                    <p style="font-size: 12px; margin-top: -20px;">(Unique visitors over the past 24 hours)</p>
+                    <p style="font-size: 12px; margin-top: -20px;">(Unique over the past 24 hours)</p>
+                </div>
+
+                <div id="chart_div" style="width: 100%; height: 300px; clear: left; padding-top: 20px;">
                 </div>
 
             </div>
