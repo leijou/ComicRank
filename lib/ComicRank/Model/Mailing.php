@@ -8,7 +8,7 @@ class Mailing extends StoredObject
         'email'     => array('string', null),
         'added'     => array('time',   null),
         'token'     => array('string', null),
-        'requester' => array('double', null),
+        'requester' => array('string', null),
     );
     protected static $table_primarykey = array('email');
 
@@ -45,7 +45,7 @@ class Mailing extends StoredObject
 
         $this->set('added', new \DateTime);
         $this->set('token', $token);
-        if (!$this->requester) $this->set('requester', ip2long($_SERVER['REMOTE_ADDR']));
+        if (!$this->requester) $this->set('requester', $_SERVER['REMOTE_ADDR']);
 
         return parent::insert();
     }
