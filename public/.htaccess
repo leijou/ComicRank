@@ -23,6 +23,10 @@ ErrorDocument 503 /rewrite/error.php?code=503
 
 RewriteRule \.git - [F,L]
 
+RewriteRule ^static/\:[0-9a-z]+/(.*)$ static/$1
+SetEnvIf Request_URI "^/static/" staticcache
+Header set Cache-Control "max-age=31104000, public" env=staticcache
+
 RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/in/?$ / [R=302,L]
 RewriteRule ^comic/([0-9a-z]{4})/stats/?$ /rewrite/comic/stats.php?id=$1 [L]

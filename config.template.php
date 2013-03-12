@@ -1,10 +1,10 @@
 <?php
-namespace ComicRank;
+define('STATIC_REVISION', '1');
 
 define('PATH_BASE', __DIR__);
 define('PATH_STATIC', __DIR__.'/public/static');
 define('URL_SITE', 'http://');
-define('URL_STATIC', URL_SITE.'/static');
+define('URL_STATIC', URL_SITE.'/static/:'.STATIC_REVISION);
 
 define('MYSQL_HOST', '');
 define('MYSQL_USER', '');

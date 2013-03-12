@@ -14,6 +14,7 @@ abstract class HTTP
     public function __construct()
     {
         $this->headers = new \Leijou\CaseInsensitiveArray;
+        $this->headers['Cache-Control'] = 'private';
 
         if (isset($_COOKIE[self::AUTH_COOKIE])) {
             $this->session = \ComicRank\Model\Session::getFromKey($_COOKIE[self::AUTH_COOKIE]);
