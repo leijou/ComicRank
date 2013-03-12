@@ -20,7 +20,7 @@ $page->canonical = '/comic/'.$comic->id('url').'/code';
 
 $page->title = 'Code: '.$comic->title;
 
-if ( (!$page->getUser()) || ($page->getUser()->id != $comic->user) ) {
+if ( (!$page->getUser()) || ( ($page->getUser()->id != $comic->user) && (!$page->getUser()->admin)) ) {
     $page->statuscode = 403;
     $page->displayHeader();
     $page->display('comic-not-authorized');

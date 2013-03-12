@@ -17,7 +17,7 @@ if (!$user) {
 }
 
 // If not logged in or not logged in as correct user
-if ( (!$page->getUser()) || ($page->getUser()->id != $user->id) ) {
+if ( (!$page->getUser()) || ( ($page->getUser()->id != $user->id) && (!$page->getUser()->admin)) ) {
     $page->exitForbidden();
 }
 
