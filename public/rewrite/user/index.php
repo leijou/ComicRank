@@ -8,12 +8,7 @@ $page = new View\HTML;
 if (!isset($_GET['id'])) $page->exitNotFound();
 $user = Model\User::getFromId($_GET['id']);
 if (!$user) {
-    $page->title = 'User not found';
-    $page->statuscode = 404;
-    $page->displayHeader();
-    $page->display('user-not-found');
-    $page->displayFooter();
-    exit;
+    $page->exitPageDisplay(404, 'user-not-found');
 }
 
 $page->canonical = '/user/'.$user->id('url').'/'.$user->name('url');
@@ -27,5 +22,4 @@ $page->title = 'User: '.$user->name;
 
 $page->displayHeader();
 $page->display('user-view', array('user'=>$user));
-$page->display('innerleaderboard');
 $page->displayFooter();

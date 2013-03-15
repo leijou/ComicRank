@@ -1,10 +1,10 @@
 
         <section class="sectionbox">
             <header>
-                <h1><?=$view['user']->name('html')?></h1>
+                <h1>Forbidden</h1>
             </header>
 
             <div class="contentwrap">
-                <p>More info to come</p>
+                <p>Sorry, I can't let you in there.</p>
             </div>
         </section>

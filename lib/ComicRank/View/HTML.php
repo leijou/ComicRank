@@ -41,101 +41,51 @@ class HTML extends HTTP
         include(PATH_BASE.'/view/innerleaderboard.php');
     }
 
-    public function exitRedirectPermanent($url)
+    public function exitPageDisplay($statuscode, $id, array $view = array())
     {
-        $this->statuscode = 301;
-        if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
-        $this->headers['Location'] = $url;
+        $this->statuscode = $statuscode;
         $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Over here</h1>
-            </header>
-            <p>You\'re lagging behind! The page you want is here: '.htmlspecialchars($url).'</p>
-        </section>';
+        $this->display($id, $view);
         $this->displayFooter();
         exit;
+    }
+
+    public function exitRedirectPermanent($url)
+    {
+        if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
+        $this->headers['Location'] = $url;
+        $this->exitPageDisplay(301, 'generic-redirect', array('url'=>$url));
     }
 
     public function exitRedirectTemporary($url)
     {
-        $this->statuscode = 302;
         if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
         $this->headers['Location'] = $url;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Over here</h1>
-            </header>
-            <p>You\'re lagging behind! The page you want is here: '.htmlspecialchars($url).'</p>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(302, 'generic-redirect', array('url'=>$url));
     }
 
     public function exitForbidden()
     {
-        $this->statuscode = 403;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Forbidden</h1>
-            </header>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(403, 'generic-forbidden');
     }
 
     public function exitNotFound()
     {
-        $this->statuscode = 404;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Page not found</h1>
-            </header>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(404, 'generic-filenotfound');
     }
 
     public function exitGone()
     {
-        $this->statuscode = 410;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Page no longer exists</h1>
-            </header>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(410, 'generic-gone');
     }
 
     public function exitInternalError()
     {
-        $this->statuscode = 500;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Internal error</h1>
-            </header>
-            <p>Something went wrong, it\'s probably our fault ☹</p>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(500, 'generic-internalerror');
     }
 
     public function exitUnavailable()
     {
-        $this->statuscode = 503;
-        $this->displayHeader();
-        echo '<section class="sectionbox">
-            <header>
-                <h1>Service unavailable</h1>
-            </header>
-        </section>';
-        $this->displayFooter();
-        exit;
+        $this->exitPageDisplay(503, 'generic-unavailable');
     }
 }

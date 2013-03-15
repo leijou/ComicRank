@@ -8,20 +8,15 @@ $page = new View\HTML;
 if (!isset($_GET['id'])) $page->exitNotFound();
 $user = Model\User::getFromId($_GET['id']);
 if (!$user) {
-    $page->title = 'User not found';
-    $page->statuscode = 404;
-    $page->displayHeader();
-    $page->display('user-not-found');
-    $page->displayFooter();
-    exit;
+    $page->exitPageDisplay(404, 'user-not-found');
 }
+
+$page->canonical = '/user/'.$user->id('url').'/edit';
 
 // If not logged in or not logged in as correct user
 if ( (!$page->getUser()) || ( ($page->getUser()->id != $user->id) && (!$page->getUser()->admin)) ) {
     $page->exitForbidden();
 }
-
-$page->canonical = '/user/'.$user->id('url').'/edit';
 
 $page->title = 'Edit user';
 

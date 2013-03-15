@@ -13,7 +13,7 @@ else{
 window.addEventListener('DOMContentLoaded',pw_load,false);
 window.addEventListener('load',pw_load,false);}})();
 </script>
-<section class="sectionbox" style="padding: 0;">
+<section class="sectionbox" style="width: 728px;">
     <header style="margin: 0; padding: 0 5px; font-size: 11px;">
         <strong>Advertisement</strong>
         <a href="https://www.projectwonderful.com/advertisehere.php?id=67194&amp;type=5" target="_blank" style="float: right;">Advertise here</a>
