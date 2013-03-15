@@ -4,7 +4,7 @@ namespace ComicRank\Model;
 /**
  *
  */
-abstract class StoredObject
+abstract class ActiveRecord
 {
     protected static $table = '';
     protected static $table_primarykey = array();

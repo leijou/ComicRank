@@ -5,7 +5,7 @@ namespace ComicRank\Model;
  * Comic Stats are read-only snapshots of a comic's reader/guest count on
  * a given day. They are generated automatically by database triggers
  */
-class ComicStats extends StoredObject
+class ComicStats extends ActiveRecord
 {
     protected static $table = 'comicstats';
     protected static $table_fields = array(

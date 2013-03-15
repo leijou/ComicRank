@@ -1,7 +1,7 @@
 <?php
 namespace ComicRank\Model;
 
-class Comic extends StoredObject
+class Comic extends ActiveRecord
 {
     protected static $table = 'comics';
     protected static $table_fields = array(
