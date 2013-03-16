@@ -3,14 +3,14 @@ namespace ComicRank;
 
 require_once(__DIR__.'/../core.php');
 
-$page = new View\HTML;
+$page = new Serve\HTML;
 
 $page->title = 'Log In';
-$page->canonical = '/login.php';
+$page->links['canonical'] = '/login.php';
 
 $errors = array();
 if ( (isset($_POST['email'])) && (isset($_POST['password'])) ) {
-    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getCSRF()) ) {
+    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getRFPKey()) ) {
         $errors['csrf'] = 'Missing or invalid security token. Please try again.';
     } else {
         $user = Model\User::getFromEmail($_POST['email']);
@@ -31,7 +31,7 @@ $page->displayHeader();
     </header>
 
     <form action="/login.php" method="post" class="big">
-        <input type="hidden" name="csrf" value="<?=$page->getCSRF()?>" />
+        <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
         <?=(isset($errors['csrf'])?'<p style="color: red">'.fmt($errors['csrf'], 'html').'</p>':'')?>
 
         <?=(isset($errors['auth'])?'<p style="color: red">'.fmt($errors['auth'], 'html').'</p>':'')?>

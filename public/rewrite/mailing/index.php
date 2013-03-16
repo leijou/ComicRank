@@ -3,8 +3,8 @@ namespace ComicRank;
 
 require_once(__DIR__.'/../../../core.php');
 
-$page = new View\HTML;
-$page->canonical = '/mailing';
+$page = new Serve\HTML;
+$page->links['canonical'] = '/mailing';
 $page->title = 'Comic Rank mailing list';
 
 $mailing = null;

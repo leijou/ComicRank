@@ -3,7 +3,7 @@ namespace ComicRank;
 
 require_once(__DIR__.'/../../../core.php');
 
-$page = new View\HTML;
+$page = new Serve\HTML;
 
 // Find mailing entry for this token
 if (!isset($_GET['token'])) $page->exitNotFound();
@@ -17,7 +17,7 @@ if (!$mailing) {
     exit;
 }
 
-$page->canonical = '/mailing/'.$mailing->token('url');
+$page->links['canonical'] = '/mailing/'.$mailing->token('url');
 $page->title = 'Mailing options';
 $page->headers['X-Robots-Tag'] = 'noindex';
 

@@ -2,7 +2,7 @@
         <div style="margin-top: -20px;">
             <div class="sectionbox">
                 <div class="contentwrap">
-                    <p style="color: #06a; font-size: 19px; line-height: 1.6em;">Logged in as: <?=$page->getUser()->name('html')?></p>
+                    <p style="color: #06a; font-size: 19px; line-height: 1.6em;">Logged in as: <?=$page->getSessionUser()->name('html')?></p>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
                     ?>
                     <p>To unsubscribe from future updates to Comic Rank click below.</p>
 
-                    <form method="post" action="<?=fmt($page->canonical, 'html')?>">
+                    <form method="post" action="<?=fmt($page->links['canonical'], 'html')?>">
                         <button type="submit" name="unsubscribe">Unsubscribe</button>
                     </form>
                     <?php

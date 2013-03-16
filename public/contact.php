@@ -2,8 +2,8 @@
 namespace ComicRank;
 require_once(__DIR__.'/../core.php');
 
-$page = new View\HTML;
-$page->canonical = '/contact.php';
+$page = new Serve\HTML;
+$page->links['canonical'] = '/contact.php';
 $page->title = 'Contact';
 
 $page->displayHeader();

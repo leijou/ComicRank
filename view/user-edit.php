@@ -6,7 +6,7 @@
 
             <div class="contentwrap">
                 <form method="post" class="big">
-                    <input type="hidden" name="csrf" value="<?=$page->getCSRF()?>" />
+                    <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
                     <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
 
                     <?=(isset($view['completions']['name'])?'<p style="color: green">'.fmt($view['completions']['name'], 'html').'</p>':'')?>
@@ -24,7 +24,7 @@
 
             <div class="contentwrap">
                 <form method="post" class="big">
-                    <input type="hidden" name="csrf" value="<?=$page->getCSRF()?>" />
+                    <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
                     <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
 
                     <?=(isset($view['completions']['password'])?'<p style="color: green">'.fmt($view['completions']['password'], 'html').'</p>':'')?>

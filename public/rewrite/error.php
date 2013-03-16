@@ -2,7 +2,7 @@
 namespace ComicRank;
 require_once(__DIR__.'/../../core.php');
 
-$page = new View\HTML;
+$page = new Serve\HTML;
 
 if (isset($_GET['code'])) switch ($_GET['code']) {
 	case 403: $page->exitForbidden(); break;

@@ -3,7 +3,7 @@ namespace ComicRank;
 
 require_once(__DIR__.'/../../../core.php');
 
-$page = new View\HTML;
+$page = new Serve\HTML;
 
 if (!isset($_GET['id'])) $page->exitNotFound();
 $user = Model\User::getFromId($_GET['id']);
@@ -11,10 +11,10 @@ if (!$user) {
     $page->exitPageDisplay(404, 'user-not-found');
 }
 
-$page->canonical = '/user/'.$user->id('url').'/edit';
+$page->links['canonical'] = '/user/'.$user->id('url').'/edit';
 
 // If not logged in or not logged in as correct user
-if ( (!$page->getUser()) || ( ($page->getUser()->id != $user->id) && (!$page->getUser()->admin)) ) {
+if ( (!$page->getSessionUser()) || ( ($page->getSessionUser()->id != $user->id) && (!$page->getSessionUser()->admin)) ) {
     $page->exitForbidden();
 }
 
@@ -23,7 +23,7 @@ $page->title = 'Edit user';
 $errors = array();
 $completions = array();
 if (isset($_POST['name'])) {
-    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getCSRF()) ) {
+    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getRFPKey()) ) {
         $errors['csrf'] = 'Missing or invalid security token. Please try again.';
     } else {
         $user->name = $_POST['name'];
@@ -35,7 +35,7 @@ if (isset($_POST['name'])) {
         }
     }
 } elseif (isset($_POST['password'])) {
-    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getCSRF()) ) {
+    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getRFPKey()) ) {
         $errors['csrf'] = 'Missing or invalid security token. Please try again.';
     } else {
         if (!$user->verifyPassword($_POST['password'])) {

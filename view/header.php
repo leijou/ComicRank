@@ -6,11 +6,11 @@
 
     <meta name="viewport" content="initial-scale=1.0, minimum-scale=1" />
     <?php
-    if ($page->author) echo '<link rel="author" href="'.htmlspecialchars($page->author).'" />'."\n    ";
-    if ($page->canonical) echo '<link rel="canonical" href="'.URL_SITE.htmlspecialchars($page->canonical).'" />'."\n    ";
+    foreach ($page->links as $rel => $href) echo '<link rel="'.htmlspecialchars($rel).'" href="'.htmlspecialchars($href).'" />'."\n    ";
     foreach ($page->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />'."\n    ";
     foreach ($page->js as $js) echo '<script src="'.htmlspecialchars($js).'"></script>'."\n    ";
     ?>
+
 </head>
 <body>
     <script>

@@ -1,26 +1,35 @@
 <?php
-namespace ComicRank\View;
+namespace ComicRank\Serve;
 
 class HTML extends HTTP
 {
     public $title = 'Comic Rank';
-    public $canonical = null;
-    public $author = null;
     public $css = array();
     public $js = array();
+
+    /**
+     * @var \Leijou\CaseInsensitiveArray
+     */
+    public $links;
 
     public function __construct()
     {
         parent::__construct();
+        $this->headers['Content-Type'] = 'text/html; charset=utf8';
+
+        $this->links = new \Leijou\CaseInsensitiveArray;
 
         $this->css[] = URL_STATIC.'/style/base.css';
-
-        $this->headers['Content-Type'] = 'text/html; charset=utf8';
     }
 
     public function displayHeader()
     {
         $this->outputHeaders();
+
+        // Make canonical links absolute
+        if ( (isset($this->links['canonical'])) && (substr($this->links['canonical'], 0, 1) == '/') ) {
+            $this->links['canonical'] = URL_SITE.$this->links['canonical'];
+        }
 
         $this->display('header');
     }
@@ -36,31 +45,24 @@ class HTML extends HTTP
         include(PATH_BASE.'/view/'.$id.'.php');
     }
 
-    public function displayInnerLeaderboard()
-    {
-        include(PATH_BASE.'/view/innerleaderboard.php');
-    }
-
-    public function exitPageDisplay($statuscode, $id, array $view = array())
+    public function exitPageDisplay($statuscode, $displayid, array $view = array())
     {
         $this->statuscode = $statuscode;
         $this->displayHeader();
-        $this->display($id, $view);
+        $this->display($displayid, $view);
         $this->displayFooter();
         exit;
     }
 
     public function exitRedirectPermanent($url)
     {
-        if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
-        $this->headers['Location'] = $url;
+        $url = $this->redirect($url);
         $this->exitPageDisplay(301, 'generic-redirect', array('url'=>$url));
     }
 
     public function exitRedirectTemporary($url)
     {
-        if (substr($url, 0, 1) == '/') $url = URL_SITE.$url;
-        $this->headers['Location'] = $url;
+        $url = $this->redirect($url);
         $this->exitPageDisplay(302, 'generic-redirect', array('url'=>$url));
     }
 
