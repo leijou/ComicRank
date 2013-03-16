@@ -85,7 +85,7 @@ class HTML extends HTTP
      */
     public function exitPageDisplay($statuscode, $displayid=null, array $view = array())
     {
-        if ($displayid) $displayid = 'error/'.$statuscode;
+        if (!$displayid) $displayid = 'error/'.$statuscode;
 
         $this->statuscode = $statuscode;
         $this->displayHeader();
