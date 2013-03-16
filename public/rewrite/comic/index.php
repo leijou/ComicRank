@@ -5,10 +5,10 @@ require_once(__DIR__.'/../../../core.php');
 
 $page = new Serve\HTML;
 
-if (!isset($_GET['id'])) $page->exitNotFound();
+if (!isset($_GET['id'])) $page->exitPageDisplay(404);
 $comic = Model\Comic::getFromId($_GET['id']);
 if (!$comic) {
-    $page->exitPageDisplay(404, 'comic-not-found');
+    $page->exitPageDisplay(404, 'comic/404');
 }
 
 $page->links['canonical'] = '/comic/'.$comic->id('url').'/'.$comic->title('url');
@@ -21,5 +21,5 @@ if ( (!isset($_GET['title'])) || ($_GET['title'] != $comic->title) ) {
 $page->title = $comic->title;
 
 $page->displayHeader();
-$page->display('comic-view', array('comic'=>$comic));
+$page->display('comic/view', array('comic'=>$comic));
 $page->displayFooter();

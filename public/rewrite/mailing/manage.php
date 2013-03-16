@@ -6,14 +6,10 @@ require_once(__DIR__.'/../../../core.php');
 $page = new Serve\HTML;
 
 // Find mailing entry for this token
-if (!isset($_GET['token'])) $page->exitNotFound();
+if (!isset($_GET['token'])) $page->exitPageDisplay(404);
 $mailing = Model\Mailing::getFromToken($_GET['token']);
 if (!$mailing) {
-    $page->title = 'Mailing options';
-    $page->statuscode = 404;
-    $page->displayHeader();
-    $page->display('mailing-not-found');
-    $page->displayFooter();
+    $page->exitPageDisplay(404, 'mailing/404');
     exit;
 }
 
@@ -27,5 +23,5 @@ if (isset($_POST['unsubscribe'])) {
 }
 
 $page->displayHeader();
-$page->display('mailing-manage', array('mailing'=>$mailing));
+$page->display('mailing/manage', array('mailing'=>$mailing));
 $page->displayFooter();

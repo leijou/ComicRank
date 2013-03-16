@@ -5,10 +5,10 @@ require_once(__DIR__.'/../../../core.php');
 
 $page = new Serve\HTML;
 
-if (!isset($_GET['id'])) $page->exitNotFound();
+if (!isset($_GET['id'])) $page->exitPageDisplay(404);
 $user = Model\User::getFromId($_GET['id']);
 if (!$user) {
-    $page->exitPageDisplay(404, 'user-not-found');
+    $page->exitPageDisplay(404, 'user/404');
 }
 
 $page->links['canonical'] = '/user/'.$user->id('url').'/'.$user->name('url');
@@ -21,5 +21,5 @@ if ( (!isset($_GET['name'])) || ($_GET['name'] != $user->name) ) {
 $page->title = 'User: '.$user->name;
 
 $page->displayHeader();
-$page->display('user-view', array('user'=>$user));
+$page->display('user/view', array('user'=>$user));
 $page->displayFooter();

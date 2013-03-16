@@ -42,5 +42,5 @@ if (isset($_POST['email'])) {
 }
 
 $page->displayHeader();
-$page->display('mailing-add', array('mailing'=>$mailing,'mailadderror'=>$mailadderror));
+$page->display('mailing/add', array('mailing'=>$mailing,'mailadderror'=>$mailadderror));
 $page->displayFooter();

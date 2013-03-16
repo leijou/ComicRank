@@ -1,17 +1,34 @@
 <?php
 namespace ComicRank\Serve;
 
+/**
+ * Represents an HTML page generated for client
+ */
 class HTML extends HTTP
 {
+    /**
+     * @var string Page title to include in HTML head
+     */
     public $title = 'Comic Rank';
+
+    /**
+     * @var array List of CSS files to include in HTML head
+     */
     public $css = array();
+
+    /**
+     * @var array List of Javascript files to include in HTML head
+     */
     public $js = array();
 
     /**
-     * @var \Leijou\CaseInsensitiveArray
+     * @var \Leijou\CaseInsensitiveArray rel => href pairs to include in HTML head
      */
     public $links;
 
+    /**
+     * Initiate HTTP headers and HTML page options
+     */
     public function __construct()
     {
         parent::__construct();
@@ -22,6 +39,9 @@ class HTML extends HTTP
         $this->css[] = URL_STATIC.'/style/base.css';
     }
 
+    /**
+     * Start HTTP output, output site header template
+     */
     public function displayHeader()
     {
         $this->outputHeaders();
@@ -34,19 +54,39 @@ class HTML extends HTTP
         $this->display('header');
     }
 
+    /**
+     * Output site footer template
+     */
     public function displayFooter()
     {
         $this->display('footer');
     }
 
+    /**
+     * Output a view template
+     *
+     * @param string $id  ID of template to output
+     * @param array $view View scope
+     */
     public function display($id, array $view = array())
     {
         $page = $this;
         include(PATH_BASE.'/view/'.$id.'.php');
     }
 
-    public function exitPageDisplay($statuscode, $displayid, array $view = array())
+    /**
+     * Set HTTP status code, display full HTML page, and stop script execution
+     *
+     * Must only be called before anything has been output
+     *
+     * @param int $statuscode   HTTP statuscode to apply
+     * @param string $displayid View template to display, defaults to statuscode's error template
+     * @param array $view       View scope
+     */
+    public function exitPageDisplay($statuscode, $displayid=null, array $view = array())
     {
+        if ($displayid) $displayid = 'error/'.$statuscode;
+
         $this->statuscode = $statuscode;
         $this->displayHeader();
         $this->display($displayid, $view);
@@ -54,40 +94,15 @@ class HTML extends HTTP
         exit;
     }
 
-    public function exitRedirectPermanent($url)
+    /**
+     * Send redirect instructions and stop script execution
+     *
+     * @param string $url     URL to redirect to
+     * @param bool $permanent Whether to flag as a permanent redirect
+     */
+    public function exitRedirect($url, $permanent=false)
     {
-        $url = $this->redirect($url);
-        $this->exitPageDisplay(301, 'generic-redirect', array('url'=>$url));
-    }
-
-    public function exitRedirectTemporary($url)
-    {
-        $url = $this->redirect($url);
-        $this->exitPageDisplay(302, 'generic-redirect', array('url'=>$url));
-    }
-
-    public function exitForbidden()
-    {
-        $this->exitPageDisplay(403, 'generic-forbidden');
-    }
-
-    public function exitNotFound()
-    {
-        $this->exitPageDisplay(404, 'generic-filenotfound');
-    }
-
-    public function exitGone()
-    {
-        $this->exitPageDisplay(410, 'generic-gone');
-    }
-
-    public function exitInternalError()
-    {
-        $this->exitPageDisplay(500, 'generic-internalerror');
-    }
-
-    public function exitUnavailable()
-    {
-        $this->exitPageDisplay(503, 'generic-unavailable');
+        $this->redirect($url, $permanent);
+        $this->exitPageDisplay($this->statuscode);
     }
 }

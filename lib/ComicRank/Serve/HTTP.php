@@ -24,7 +24,7 @@ abstract class HTTP
     public $headers;
 
     /**
-     * Setup HTML header defaults and LoginSession from cookie
+     * Setup HTML header defaults and recover states from cookies
      */
     public function __construct()
     {
@@ -76,7 +76,7 @@ abstract class HTTP
      *
      * URLs starting with a / will have the site's base URL prepended
      *
-     * @param string $url     URL to redirect ti
+     * @param string $url     URL to redirect to
      * @param bool $permanent Whether to flag as a permanent redirect
      * @return string         Full URL used for the redirect
      */

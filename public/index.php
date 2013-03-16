@@ -10,8 +10,8 @@ $page->title = 'Comic Rank';
 $page->displayHeader();
 if ($page->getSessionUser()) {
     $comics = Model\Comic::getFromUser($page->getSessionUser()->id);
-    $page->display('index-user', array('user'=>$page->getSessionUser(), 'comics'=>$comics));
+    $page->display('base/index-user', array('user'=>$page->getSessionUser(), 'comics'=>$comics));
 } else {
-    $page->display('index-public');
+    $page->display('base/index-public');
 }
 $page->displayFooter();

@@ -6,4 +6,4 @@ require_once(__DIR__.'/../core.php');
 $page = new Serve\HTML;
 
 $page->unsetSessionUser();
-$page->exitRedirectTemporary('/');
+$page->exitRedirect('/');

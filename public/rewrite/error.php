@@ -1,15 +1,18 @@
 <?php
 namespace ComicRank;
+
 require_once(__DIR__.'/../../core.php');
 
 $page = new Serve\HTML;
 
 if (isset($_GET['code'])) switch ($_GET['code']) {
-	case 403: $page->exitForbidden(); break;
-	case 404: $page->exitNotFound(); break;
-	case 410: $page->exitGone(); break;
-	case 500: $page->exitInternalError(); break;
-	case 503: $page->exitUnavailable(); break;
+	case 403:
+	case 404:
+	case 410:
+	case 500:
+	case 503:
+        $page->exitPageDisplay($_GET['code']);
+        break;
 }
 
-$page->exitNotFound();
+$page->exitPageDisplay(404);

@@ -5,10 +5,10 @@ require_once(__DIR__.'/../../../core.php');
 
 $page = new Serve\HTML;
 
-if (!isset($_GET['id'])) $page->exitNotFound();
+if (!isset($_GET['id'])) $page->exitPageDisplay(404);
 $user = Model\User::getFromId($_GET['id']);
 if (!$user) {
-    $page->exitPageDisplay(404, 'user-not-found');
+    $page->exitPageDisplay(404, 'user/404');
 }
 
 $page->links['canonical'] = '/user/'.$user->id('url').'/edit';
@@ -55,5 +55,5 @@ if (isset($_POST['name'])) {
 }
 
 $page->displayHeader();
-$page->display('user-edit', array('user'=>$user, 'errors'=>$errors, 'completions'=>$completions));
+$page->display('user/edit', array('user'=>$user, 'errors'=>$errors, 'completions'=>$completions));
 $page->displayFooter();
