@@ -15,7 +15,7 @@ $page->links['canonical'] = '/comic/'.$comic->id('url').'/'.$comic->title('url')
 
 // Redirect incorrect / out of date comic title links to canonical URL
 if ( (!isset($_GET['title'])) || ($_GET['title'] != $comic->title) ) {
-    $page->exitRedirectTemporary($page->links['canonical']);
+    $page->exitRedirect($page->links['canonical']);
 }
 
 $page->title = $comic->title;

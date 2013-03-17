@@ -27,8 +27,10 @@ RewriteRule ^static/\:[0-9a-z]+/(.*)$ static/$1
 SetEnvIf Request_URI "^/static/" staticcache
 Header set Cache-Control "max-age=31104000, public" env=staticcache
 
+RewriteRule ^comic/add/?$ /rewrite/comic/add.php [L]
 RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/in/?$ / [R=302,L]
+RewriteRule ^comic/([0-9a-z]{4})/edit/?$ /rewrite/comic/edit.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/stats/?$ /rewrite/comic/stats.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/code/?$ /rewrite/comic/code.php?id=$1 [L]
 RewriteRule ^comic/([0-9a-z]{4})/(.+)/?$ /rewrite/comic/index.php?id=$1&title=$2 [L]

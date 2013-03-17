@@ -21,6 +21,8 @@
                     <a href="/comic/<?=$comic->id('url')?>/stats">Stats</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <a href="/comic/<?=$comic->id('url')?>/code">Code</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="/comic/<?=$comic->id('url')?>/edit">Edit</a>
                     <?php
                 }
                 ?>
@@ -38,7 +40,7 @@
             </header>
 
             <div class="contentwrap">
-                <p>Now that you've infiltrated the elusive Comic Rank it would be prudent of you to add your webcomic.</p>
+                <p>Now that you've infiltrated Comic Rank it would be prudent of you to add your webcomic.</p>
                 <p>Comic Rank's not much to look at the moment, but if you keep an eye out for the links you'll be able to get around. Steve's constantly developing the site and you can see what's going on in the <a href="/about.php">About page</a>.</p>
 
                 <a href="/comic/add">Add Comic</a> &nbsp;&nbsp;&nbsp;&nbsp; &lt;-- There it is! Quick, click it!
