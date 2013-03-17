@@ -83,7 +83,7 @@ trait LoginSession
     public function setSessionUser(\ComicRank\Model\User $user)
     {
         // Replace existing session if exists
-        if ($this->session) $this->unsetSession();
+        if ($this->session) $this->unsetSessionUser();
 
         $this->sessionuser = $user;
         $this->session = new \ComicRank\Model\Session;
