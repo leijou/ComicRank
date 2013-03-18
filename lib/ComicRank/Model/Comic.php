@@ -5,15 +5,16 @@ class Comic extends ActiveRecord
 {
     protected static $table = 'comics';
     protected static $table_fields = array(
-        'id'      => array('string', null),
-        'added'   => array('time',   null),
-        'user'    => array('string', null),
-        'url'     => array('string', '',),
-        'title'   => array('string', '',),
-        'nsfw'    => array('bool',   0),
-        'public'  => array('bool',   1),
-        'readers' => array('int',    0),
-        'guests'  => array('int',    0),
+        'id'            => array('string', null),
+        'added'         => array('time',   null),
+        'user'          => array('string', null),
+        'url'           => array('string', '',),
+        'title'         => array('string', '',),
+        'nsfw'          => array('bool',   0),
+        'public'        => array('bool',   1),
+        'readers'       => array('int',    0),
+        'dailyvisitors' => array('int',    0),
+        'dailyreaders'  => array('int',    0),
     );
     protected static $table_primarykey = array('id');
 

@@ -16,7 +16,8 @@
                         <dt>Readers</dt>
                         <dd><?=$comic->readers('int')?></dd>
                         <dt>Unique viewers</dt>
-                        <dd><?=$comic->guests('int')?> in the last 24 hours</dd>
+                        <dd><?=$comic->dailyvisitors('int')?> in the last 24 hours</dd>
+                        <dd><?=$comic->dailyreaders('int')?> were readers</dd>
                     </dl>
                     <a href="/comic/<?=$comic->id('url')?>/stats">Stats</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
