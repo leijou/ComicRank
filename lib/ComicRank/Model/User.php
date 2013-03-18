@@ -26,6 +26,15 @@ class User extends ActiveRecord
         return static::getSingleFromSQL('SELECT * FROM users WHERE email = :email', array(':email'=>$email));
     }
 
+    public function getComics()
+    {
+        if ($this->admin) {
+            return Comic::getFromSQL('SELECT * FROM comics ORDER BY readers DESC');
+        } else {
+            return Comic::getFromUserId($this->id);
+        }
+    }
+
     protected function set($field, $value)
     {
         if ($field == 'password') {

@@ -24,7 +24,7 @@ class Comic extends ActiveRecord
         return static::getSingleFromSQL('SELECT * FROM comics WHERE id = :id', array(':id'=>$id));
     }
 
-    public static function getFromUser($user)
+    public static function getFromUserId($user)
     {
         if (!$user) return false;
         return static::getFromSQL('SELECT * FROM comics WHERE user = :user', array(':user'=>$user));
