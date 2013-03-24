@@ -4,7 +4,7 @@
                 <h1>Code: <?=$view['comic']->title('html')?></h1>
             </header>
 
-            <div class="contentwrap">
+            <div class="sectionfull">
                 <p>To track readers you need to place the Comic Rank button on your site. If installed properly it will look like this: <img src="http://stats.comicrank.com/v1/img.jpg" /></p>
 
                 <h2>For your site</h2>

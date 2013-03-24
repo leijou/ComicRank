@@ -4,7 +4,7 @@
                 <h1><?=$view['user']->name('html')?></h1>
             </header>
 
-            <div class="contentwrap">
-                <p>More info to come</p>
+            <div class="sectionmain">
+                <p>User on Comic Rank</p>
             </div>
         </section>

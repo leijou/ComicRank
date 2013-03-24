@@ -4,7 +4,7 @@
                 <h1>Mailing options</h1>
             </header>
 
-            <div class="contentwrap">
+            <div class="sectionmain">
                 <?php
                 if ($view['mailing']) {
                     ?>
@@ -21,4 +21,8 @@
                 }
                 ?>
             </div>
+
+            <div class="sectionside" style="height: 350px; background: url(<?=URL_STATIC?>/images/marvinfixesit.png) top left no-repeat">
+            </div>
+
         </section>

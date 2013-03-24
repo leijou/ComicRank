@@ -4,7 +4,7 @@
                 <h1>Log In</h1>
             </header>
 
-            <div class="contentwrap">
+            <div class="sectionmain">
                 <form action="/login.php" method="post" class="big">
                     <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
                     <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
@@ -15,8 +15,4 @@
                     <button type="submit">Log In</button>
                 </form>
             </div>
-
-            <footer>
-                <p>If you're part of the current closed beta and are having trouble logging in please email Steve.</p>
-            </footer>
         </section>

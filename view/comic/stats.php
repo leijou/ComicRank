@@ -25,7 +25,7 @@
                 ?>
             ]);
 
-            var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ComboChart(document.getElementById('chart_div<?=$view['comic']->id?>'));
             chart.draw(data, {
                 chartArea: {width: '100%'},
                 hAxis: {format:'MMM d', viewWindowMode: 'maximized'},
@@ -45,8 +45,7 @@
                 <h1>Stats: <?=$view['comic']->title('html')?></h1>
             </header>
 
-            <div class="contentwrap">
-
+            <div class="sectionmain">
                 <div style="float: left; width: 33.33%; text-align: center; border-bottom: solid 5px #36c;">
                     <h2>Readers</h2>
                     <p style="font-size: 24px;"><?=$view['comic']->readers('int')?></p>
@@ -62,11 +61,21 @@
                 <div style="float: left; width: 33.33%; text-align: center; border-bottom: solid 5px #f90;">
                     <h2>Readers today</h2>
                     <p style="font-size: 24px;"><?=$view['comic']->dailyreaders('int')?></p>
-                    <p style="font-size: 12px; margin-top: -10px;">Readers who have visited over the past 24 hours</p>
+                    <p style="font-size: 12px; margin-top: -10px;">Readers who visited in the past 24 hours</p>
                 </div>
 
-                <div id="chart_div" style="width: 100%; height: 300px; clear: left;">
+                <div id="chart_div<?=$view['comic']->id?>" style="width: 100%; height: 300px; clear: left;">
                 </div>
-
             </div>
+
+            <div class="sectionside">
+                <h2>Manage comic</h2>
+                <nav>
+                    <ul class="nostyle">
+                        <li><a href="/comic/<?=$view['comic']->id('url')?>/edit">Edit</a></li>
+                        <li><a href="/comic/<?=$view['comic']->id('url')?>/code">Code</a></li>
+                    </ul>
+                </nav>
+            </div>
+
         </section>

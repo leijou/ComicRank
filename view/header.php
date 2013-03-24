@@ -4,7 +4,6 @@
     <title><?=htmlspecialchars($page->title)?></title>
     <link rel="publisher" href="https://plus.google.com/108661948674027877061" />
 
-    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1" />
     <?php
     foreach ($page->links as $rel => $href) echo '<link rel="'.htmlspecialchars($rel).'" href="'.htmlspecialchars($href).'" />'."\n    ";
     foreach ($page->css as $css) echo '<link rel="stylesheet" href="'.htmlspecialchars($css).'" />'."\n    ";
@@ -24,10 +23,10 @@
         })();
     </script>
 
+
     <header id="siteheader">
-        <div class="contentwrap">
-            <a href="/" id="siteheaderlink"><img src="<?=URL_STATIC?>/images/heading.png" alt=""></a>
-        </div>
+        <a href="/" id="siteheaderlink"><img src="<?=URL_STATIC?>/images/heading.png" alt="Comic Rank"></a>
     </header>
 
     <div id="sitecontent">
+

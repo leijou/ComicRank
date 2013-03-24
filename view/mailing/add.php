@@ -4,7 +4,7 @@
                 <h1>Mailing list</h1>
             </header>
 
-            <div class="contentwrap">
+            <div class="sectionmain">
                 <?php
                 if ($view['mailing']) {
                     ?>

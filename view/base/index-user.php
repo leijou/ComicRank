@@ -1,51 +1,16 @@
-
     <?php
-    if (count($view['comics'])) {
-        ?>
-        <section class="sectionbox">
-            <header>
-                <h1>My Comics</h1>
-            </header>
-
-            <div class="contentwrap">
-                <?php
-                foreach ($view['comics'] as $comic) {
-                    ?>
-                    <h2><a href="/comic/<?=$comic->id('url')?>/<?=$comic->title('url')?>"><?=$comic->title('html')?></a></h2>
-                    <dl>
-                        <dt>Readers</dt>
-                        <dd><?=$comic->readers('int')?></dd>
-                        <dt>Unique viewers</dt>
-                        <dd><?=$comic->dailyvisitors('int')?> in the last 24 hours</dd>
-                        <dd><?=$comic->dailyreaders('int')?> were readers</dd>
-                    </dl>
-                    <a href="/comic/<?=$comic->id('url')?>/stats">Stats</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/comic/<?=$comic->id('url')?>/code">Code</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/comic/<?=$comic->id('url')?>/edit">Edit</a>
-                    <?php
-                }
-                ?>
-
-                <h2>Add Comic</h2>
-                <a href="/comic/add">Add Comic</a>
-            </div>
-        </section>
-        <?php
-    } else {
+    if (!count($view['comics'])) {
         ?>
         <section class="sectionbox">
             <header>
                 <h1>You're in! Good job soldier</h1>
             </header>
 
-            <div class="contentwrap">
+            <div class="sectionfull">
                 <p>Now that you've infiltrated Comic Rank it would be prudent of you to add your webcomic.</p>
-                <p>Comic Rank's not much to look at the moment, but if you keep an eye out for the links you'll be able to get around. Steve's constantly developing the site and you can see what's going on in the <a href="/about.php">About page</a>.</p>
-
-                <a href="/comic/add">Add Comic</a> &nbsp;&nbsp;&nbsp;&nbsp; &lt;-- There it is! Quick, click it!
+                <p>Comic Rank's not much to look at the moment, but if you keep an eye out for the links you'll be able to get around. Steve's constantly developing the site and you should hopefully see things improving over the coming months.</p>
             </div>
+
         </section>
         <?php
     }
@@ -56,15 +21,22 @@
                 <h1>My Details</h1>
             </header>
 
-            <div class="contentwrap">
-                <dl>
-                    <dt>Name</dt>
-                    <dd><a href="/user/<?=$view['user']->id('url')?>/<?=$view['user']->name('url')?>"><?=$view['user']->name('html')?></a></dd>
-                    <dt>Email</dt>
-                    <dd><?=$view['user']->email('html')?></dd>
-                </dl>
-                <a href="/user/<?=$view['user']->id('url')?>/edit">Edit</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/logout.php">Logout</a>
+            <div class="sectionmain">
+                <p>
+                    <a href="/user/<?=$view['user']->id('url')?>/<?=$view['user']->name('url')?>"><?=$view['user']->name('html')?></a>
+                    &lt;<?=$view['user']->email('html')?>&gt;
+                </p>
             </div>
+
+            <div class="sectionside">
+                <h2>Check Yo Self</h2>
+                <nav>
+                    <ul class="nostyle">
+                        <li><a href="/comic/add">Add Comic</a></li>
+                        <li><a href="/user/<?=$view['user']->id('url')?>/edit">Edit Account</a></li>
+                        <li><a href="/logout.php">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+
         </section>
