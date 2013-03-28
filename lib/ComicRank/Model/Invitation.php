@@ -5,18 +5,18 @@ class Invitation extends ActiveRecord
 {
     protected static $table = 'invitations';
     protected static $table_fields = array(
-        'email'    => array('email',  null),
         'key'      => array('string',  null),
+        'email'    => array('email',  null),
         'expires'  => array('time',   null),
         'sender'   => array('string', null),
         'receiver' => array('string', null),
     );
-    protected static $table_primarykey = array('email');
+    protected static $table_primarykey = array('key');
 
-    public static function getFromEmail($email)
+    public static function getFromKey($key)
     {
-        if (!$email) return false;
-        return static::getSingleFromSQL('SELECT * FROM invitations WHERE `email` = :email', array(':email'=>$email));
+        if (!$key) return false;
+        return static::getSingleFromSQL('SELECT * FROM invitations WHERE `key` = :key', array(':key'=>$key));
     }
 
     public function validate()

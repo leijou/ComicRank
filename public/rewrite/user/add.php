@@ -8,11 +8,9 @@ $page = new Serve\HTML;
 $page->title = 'Register';
 $page->link['canonical'] = '/user/add';
 
-if (!isset($_GET['email'])) $page->exitPageDisplay(404, 'user/register-bad');
 if (!isset($_GET['key'])) $page->exitPageDisplay(404, 'user/register-bad');
-$invitation = Model\Invitation::getFromEmail($_GET['email']);
+$invitation = Model\Invitation::getFromKey($_GET['key']);
 if (!$invitation) $page->exitPageDisplay(404, 'user/register-bad');
-if ($invitation->key != $_GET['key']) $page->exitPageDisplay(404, 'user/register-bad');
 if ($invitation->expires('datetime') < new \DateTime) $page->exitPageDisplay(404, 'user/register-bad');
 
 $errors = array();
