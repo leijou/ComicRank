@@ -21,5 +21,5 @@ if ( (isset($_POST['email'])) && (isset($_POST['password'])) ) {
 }
 
 $page->displayHeader();
-$page->display('base/login', array('errors'=>$errors));
+$page->display('user/login', array('errors'=>$errors));
 $page->displayFooter();
