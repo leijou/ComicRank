@@ -71,7 +71,7 @@ class HTML extends HTTP
     public function display($id, array $view = array())
     {
         $page = $this;
-        include(PATH_BASE.'/view/'.$id.'.php');
+        include(PATH_BASE.'/templates/'.$id.'.php');
     }
 
     /**

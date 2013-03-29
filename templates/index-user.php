@@ -34,7 +34,7 @@
                     <ul class="nostyle">
                         <li><a href="/comic/add">Add Comic</a></li>
                         <li><a href="/user/<?=$view['user']->id('url')?>/edit">Edit Account</a></li>
-                        <li><a href="/logout.php">Logout</a></li>
+                        <li><a href="/user/logout">Logout</a></li>
                     </ul>
                 </nav>
             </div>

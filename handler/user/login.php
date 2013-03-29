@@ -1,12 +1,10 @@
 <?php
 namespace ComicRank;
 
-require_once(__DIR__.'/../core.php');
-
 $page = new Serve\HTML;
 
 $page->title = 'Log In';
-$page->links['canonical'] = '/login.php';
+$page->links['canonical'] = '/user/login';
 
 $errors = array();
 if ( (isset($_POST['email'])) && (isset($_POST['password'])) ) {

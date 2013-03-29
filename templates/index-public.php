@@ -9,7 +9,7 @@
             <div class="sectionmain">
                 <p>Comic Rank is currently in a closed beta, and can be used by invitation only. If you'd like to be informed of updates, and get invitations as soon as possible, then please sign up here:</p>
 
-                <form action="/mailing" method="post" class="big">
+                <form action="/mailing/add" method="post" class="big">
                     <input type="email" name="email" placeholder="Your email address" required />
                     <button type="submit">Add</button>
                 </form>
@@ -17,7 +17,7 @@
 
             <div class="sectionside">
                 <h2>Log In:</h2>
-                <form action="/login.php" method="post">
+                <form action="/user/login" method="post">
                     <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
                     <input type="email" name="email" placeholder="Email" required /><br />
                     <input type="password" name="password" placeholder="Password" required /><br />

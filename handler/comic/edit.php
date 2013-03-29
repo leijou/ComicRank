@@ -1,8 +1,6 @@
 <?php
 namespace ComicRank;
 
-require_once(__DIR__.'/../../../core.php');
-
 $page = new Serve\HTML;
 
 if (!isset($_GET['id'])) $page->exitPageDisplay(404);

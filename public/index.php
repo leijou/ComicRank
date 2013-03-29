@@ -3,30 +3,64 @@ namespace ComicRank;
 
 require_once(__DIR__.'/../core.php');
 
-$page = new Serve\HTML;
-$page->links['canonical'] = '/';
-$page->title = 'Comic Rank';
+// Get URI from apache rewrite
+$url = '/index';
+if (isset($_SERVER['REDIRECT_URL'])) $url = $_SERVER['REDIRECT_URL'];
 
-$page->js[] = 'http://www.google.com/jsapi';
+// Remove leading & trailing slash
+$url = substr($url, 1);
+if (substr($url, -1) == '/') $url = substr($url, 0, -1);
 
-$page->displayHeader();
-if ($page->getSessionUser()) {
-    $comics = $page->getSessionUser()->getComics();
+$routes = [
+    'comic/([0-9a-z]{4})' => ['comic/view','id'],
+    'comic/([0-9a-z]{4})/edit' => ['comic/edit','id'],
+    'comic/([0-9a-z]{4})/stats' => ['comic/stats','id'],
+    'comic/([0-9a-z]{4})/code' => ['comic/code','id'],
+    'comic/([0-9a-z]{4})/(.+)' => ['comic/view','id','title'],
 
-    $page->display('base/index-user', array('user'=>$page->getSessionUser(), 'comics'=>$comics));
+    'user/add/([0-9a-z]{10,})' => ['user/add','key'],
+    'user/([0-9a-z]{4})' => ['user/view','id'],
+    'user/([0-9a-z]{4})/edit' => ['user/edit','id'],
+    'user/([0-9a-z]{4})/(.+)' => ['user/view','id','title'],
 
-    foreach ($comics as $comic) {
-        $stats = \ComicRank\Model\ComicStats::getFromSQL('
-            SELECT * FROM comicstats
-            WHERE `comic` = :comic AND
-                `date` >= (UTC_DATE() - INTERVAL 6 WEEK)
-            ORDER BY `date` ASC', array(':comic'=>$comic->id));
+    'mailing/([0-9a-z]{5,})' => ['mailing/manage','token'],
 
-        $page->display('comic/stats', array('comic'=>$comic, 'stats'=>$stats));
-    }
+    'error/([0-9]{3})' => ['error','code'],
+];
 
+$handler = false;
+switch ($url) {
+    case '':
+        $url = 'index';
+    case 'index':
+    case 'about':
+    case 'contact':
+    case 'terms':
+    case 'comic/add':
+    case 'user/login':
+    case 'user/logout':
+    case 'user/add':
+    case 'mailing/add':
+        $handler = $url;
+        break;
 
-} else {
-    $page->display('base/index-public');
+    default:
+        $matches = array();
+        foreach ($routes as $regex => $info) {
+            if (preg_match('#^'.$regex.'$#', $url, $matches)) {
+                $params = array_flip($info);
+                foreach ($info as $k => $v) {
+                    if ($k == 0) {
+                        $handler = $v;
+                    } else {
+                        $_GET[$v] = $matches[$k];
+                    }
+                }
+                break;
+            }
+        }
+        break;
 }
-$page->displayFooter();
+
+if (!$handler) $handler = 'error';
+require(__DIR__.'/../handler/'.$handler.'.php');
