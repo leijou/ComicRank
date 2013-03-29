@@ -18,10 +18,10 @@ $routes = [
     'comic/([0-9a-z]{4})/code' => ['comic/code','id'],
     'comic/([0-9a-z]{4})/(.+)' => ['comic/view','id','title'],
 
-    'user/add/([0-9a-z]{10,})' => ['user/add','key'],
+    'user/add/([0-9A-Z]{8,})' => ['user/add','key'],
     'user/([0-9a-z]{4})' => ['user/view','id'],
     'user/([0-9a-z]{4})/edit' => ['user/edit','id'],
-    'user/([0-9a-z]{4})/(.+)' => ['user/view','id','title'],
+    'user/([0-9a-z]{4})/(.+)' => ['user/view','id','name'],
 
     'mailing/([0-9a-z]{5,})' => ['mailing/manage','token'],
 
@@ -40,6 +40,7 @@ switch ($url) {
     case 'user/login':
     case 'user/logout':
     case 'user/add':
+    case 'user/invite':
     case 'mailing/add':
         $handler = $url;
         break;

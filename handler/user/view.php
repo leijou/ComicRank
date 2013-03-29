@@ -10,10 +10,11 @@ if (!$user) {
 }
 
 $page->links['canonical'] = '/user/'.$user->id('url').'/'.$user->name('url');
+$page->headers['X-Robots-Tag'] = 'noindex'; // For now avoid search engines
 
 // Redirect incorrect / out of date user name links to canonical URL
 if ( (!isset($_GET['name'])) || ($_GET['name'] != $user->name) ) {
-    $page->exitRedirectTemporary($page->links['canonical']);
+    $page->exitRedirect($page->links['canonical']);
 }
 
 $page->title = 'User: '.$user->name;

@@ -10,6 +10,7 @@ if (!$comic) {
 }
 
 $page->links['canonical'] = '/comic/'.$comic->id('url').'/'.$comic->title('url');
+$page->headers['X-Robots-Tag'] = 'noindex'; // For now avoid search engines
 
 // Redirect incorrect / out of date comic title links to canonical URL
 if ( (!isset($_GET['title'])) || ($_GET['title'] != $comic->title) ) {

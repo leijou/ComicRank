@@ -11,6 +11,8 @@ $invitation = Model\Invitation::getFromKey($_GET['key']);
 if (!$invitation) $page->exitPageDisplay(404, 'user/register-bad');
 if ($invitation->expires('datetime') < new \DateTime) $page->exitPageDisplay(404, 'user/register-bad');
 
+$page->headers['X-Robots-Tag'] = 'noindex';
+
 $errors = array();
 if (isset($_POST['register'])) {
     if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getRFPKey()) ) {
