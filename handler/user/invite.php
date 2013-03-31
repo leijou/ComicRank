@@ -7,7 +7,7 @@ $page->links['canonical'] = '/user/invite';
 
 // If not logged in or not admin
 if ( (!$page->getSessionUser()) || (!$page->getSessionUser()->admin) ) {
-    $page->exitForbidden();
+    $page->exitPageDisplay(403);
 }
 
 $page->title = 'Invite user';

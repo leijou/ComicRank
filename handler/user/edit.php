@@ -13,7 +13,7 @@ $page->links['canonical'] = '/user/'.$user->id('url').'/edit';
 
 // If not logged in or not logged in as correct user
 if ( (!$page->getSessionUser()) || ( ($page->getSessionUser()->id != $user->id) && (!$page->getSessionUser()->admin)) ) {
-    $page->exitForbidden();
+    $page->exitPageDisplay(403);
 }
 
 $page->title = 'Edit user';
