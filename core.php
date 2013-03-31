@@ -43,6 +43,7 @@ function fmt($value, $format)
         case 'currency': return ($extra?$extra:'').number_format($value);
         case 'posessive': return $value.'’'.(substr($value, -1)=='s'?'':'s');
         case 'datetime': return new DateTime($value);
+        case 'postlink': return preg_replace('/&gt;&gt; ?([0-9]+)/', '<a href="/forum/$1">&gt;&gt;$1</a>', $value);
 
         // Catch unknown formatters and assume they are date formats
         default:

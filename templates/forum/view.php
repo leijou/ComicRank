@@ -13,7 +13,7 @@
                 <div class="sectionmain">
                     <img src="http://www.gravatar.com/avatar/<?=$firstpost->anonhash('url')?>?s=80&amp;d=identicon&amp;f=y" style="float: left;" />
                     <div style="margin-left: 100px;">
-                        <p><?=nl2br($firstpost->body('html'))?></p>
+                        <p><?=nl2br($firstpost->body('html|postlink'))?></p>
                     </div>
                 </div>
 
@@ -31,11 +31,11 @@
                     <div class="sectionmain">
                         <img src="http://www.gravatar.com/avatar/<?=$post->anonhash('url')?>?s=80&amp;d=identicon&amp;f=y" style="float: left;" />
                         <div style="margin-left: 100px;">
-                            <p><?=nl2br($post->body('html'))?></p>
+                            <p><?=nl2br($post->body('html|postlink'))?></p>
                         </div>
                     </div>
 
-                    <div class="sectionside" style="background: transparent;">
+                    <div class="sectionside">
                         <p>ID: <?=$post->id?> [<a href="#addreply" onclick="document.getElementById('replybox').value = document.getElementById('replybox').value + '\n&gt;&gt;<?=$post->id?>\n';">reply</a>]</p>
                         <p><?=$post->added('datetime')->format('H:i d M')?></p>
                     </div>
