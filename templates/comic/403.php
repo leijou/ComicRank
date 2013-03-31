@@ -8,7 +8,7 @@
                 <?php if ($page->getSessionUser()) { ?>
                     <p>Sorry, only the comic owner can see this page.</p>
                 <?php } else { ?>
-                    <p>Sorry, but I can't let you see that. Please try <a href="/login.php">logging in</a>.</p>
+                    <p>Sorry, but I can't let you see that. Please try <a href="/user/login">logging in</a>.</p>
                 <?php } ?>
             </div>
 

@@ -3,7 +3,7 @@ namespace ComicRank;
 
 $page = new Serve\HTML;
 
-if (!$page->getSessionUser()) $page->exitForbidden(); // For now beta users only
+if (!$page->getSessionUser()) $page->exitPageDisplay(403, 'forum/403'); // For now beta users only
 
 
 $errors = array();

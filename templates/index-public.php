@@ -103,7 +103,7 @@
                 <h2>Plans &amp; Ideas</h2>
                 <ul>
                     <li><del>Open source ComicRank.com so anyone can contribute</del> <a href="https://github.com/leijou/ComicRank">Done</a>!</li>
-                    <li>Small, centralized forum for discussing Comic Rank</li>
+                    <li><del>Small, centralized forum for discussing Comic Rank</del> <a href="/forum">Beta Testing</a>!</li>
                     <li>Free access for all reasonably sized webcomics</li>
                     <li>Stats history browse / download</li>
                     <li>Public leaderboards (community moderated)</li>
