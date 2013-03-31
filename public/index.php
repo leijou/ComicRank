@@ -25,13 +25,17 @@ $routes = [
 
     'mailing/([0-9a-z]{5,})' => ['mailing/manage','token'],
 
+    'forum/([0-9]+)' => ['forum/view','id'],
+
     'error/([0-9]{3})' => ['error','code'],
 ];
 
 $handler = false;
 switch ($url) {
+    case 'forum':
+        $url .= '/';
     case '':
-        $url = 'index';
+        $url .= 'index';
     case 'index':
     case 'about':
     case 'contact':
@@ -42,6 +46,7 @@ switch ($url) {
     case 'user/add':
     case 'user/invite':
     case 'mailing/add':
+    case 'forum/about':
         $handler = $url;
         break;
 
