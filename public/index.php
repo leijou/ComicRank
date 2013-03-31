@@ -5,7 +5,7 @@ require_once(__DIR__.'/../core.php');
 
 // Get URI from apache rewrite
 $url = '/index';
-if (isset($_SERVER['REDIRECT_URL'])) $url = $_SERVER['REDIRECT_URL'];
+if (isset($_SERVER['REDIRECT_URL'])) $url = urldecode($_SERVER['REDIRECT_URL']);
 
 // Remove leading & trailing slash
 $url = substr($url, 1);
