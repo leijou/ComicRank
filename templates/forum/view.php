@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="sectionside">
-                    <p>ID: <?=$firstpost->id?> [<a href="#addreply">reply</a>]</p>
+                    <p>Post ID: <?=$firstpost->id?> [<a href="#addreply">reply</a>]</p>
                     <p><?=$firstpost->added('datetime')->format('H:i d M')?></p>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="sectionside">
-                        <p>ID: <?=$post->id?> [<a href="#addreply" onclick="document.getElementById('replybox').value = document.getElementById('replybox').value + '\n&gt;&gt;<?=$post->id?>\n';">reply</a>]</p>
+                        <p>Post ID: <?=$post->id?> [<a href="#addreply" onclick="document.getElementById('replybox').value = document.getElementById('replybox').value + '\n&gt;&gt;<?=$post->id?>\n';">reply</a>]</p>
                         <p><?=$post->added('datetime')->format('H:i d M')?></p>
                     </div>
 
