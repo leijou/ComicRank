@@ -40,3 +40,35 @@
             </div>
 
         </section>
+
+        <section class="sectionbox">
+            <header>
+                <h1>My Posts</h1>
+            </header>
+
+            <div class="sectionmain">
+                <ol class="nostyle">
+                <?php
+                foreach ($view['posts'] as $post) {
+                    ?>
+                    <li>
+                        <a href="/forum/<?=fmt($post['firstpost'], 'url')?>#p<?=fmt($post['id'], 'url')?>"><?=fmt($post['title'], 'html')?></a><br />
+                        <?=fmt($post['since'], 'html')?> repl<?=($post['since']==1?'y':'ies')?> since
+                    </li>
+                    <?php
+                }
+                ?>
+                </ol>
+            </div>
+
+            <div class="sectionside">
+                <h2>The Forum</h2>
+                <nav>
+                    <ul class="nostyle">
+                        <li><a href="/forum">Visit the forum</a></li>
+                        <li><a href="/forum/about">Understand the forum</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </section>
