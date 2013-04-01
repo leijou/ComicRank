@@ -5,7 +5,7 @@
             </header>
 
             <div class="sectionmain">
-                <form action="/login.php" method="post" class="big">
+                <form action="/user/login" method="post" class="big">
                     <input type="hidden" name="csrf" value="<?=$page->getRFPKey()?>" />
                     <?=(isset($view['errors']['csrf'])?'<p style="color: red">'.fmt($view['errors']['csrf'], 'html').'</p>':'')?>
 
