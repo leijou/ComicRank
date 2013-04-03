@@ -23,19 +23,20 @@ if (isset($_POST['email'])) {
 
     // Send confirmation email
     if ($mailing) {
-        $message = new \Swift_Message('Comic Rank mailing list');
-        $message->setTo($mailing->email);
-        $message->setBody(
-            'Thanks for supporting Comic Rank. We\'ll send an email to '.$mailing->email.' again when there is something to say.'."\n"
-            ."\n"
-            .'- Steve H'."\n"
-            ."\n"
-            .'Twitter: @comicrank'."\n"
-            .'Google: +Comic Rank'."\n"
-            ."\n"
-            .'Unsubscribe: '.URL_SITE.'/mailing/'.$mailing->token('url')
-        );
-        \ComicRank\Mailer::sendAsNoReply($message);
+        $email = new Model\Email;
+        $email->subject = 'Comic Rank mailing list';
+        $email->fromaccount = 'noreply';
+        $email->toaddress = $mailing->email;
+        $email->body =  'Thanks for supporting Comic Rank. We\'ll send an email to '.$mailing->email.' again when there is something to say.'."\n"
+                        ."\n"
+                        .'- Steve H'."\n"
+                        ."\n"
+                        .'Twitter: @comicrank'."\n"
+                        .'Google: +Comic Rank'."\n"
+                        ."\n"
+                        .'Unsubscribe: '.URL_SITE.'/mailing/'.$mailing->token('url');
+        $email->send();
+        $email->insert();
     }
 }
 
