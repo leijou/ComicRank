@@ -112,7 +112,7 @@
                 </ul>
             </div>
 
-            <div class="sectionside" style="height: 300px; background: url(<?=URL_STATIC?>/images/marvinchills.png) bottom right no-repeat">
+            <div class="sectionside" style="height: 300px; background: url(<?=URL_STATIC?>/images/marvinchecksit.png) bottom center no-repeat">
             </div>
 
         </section>
