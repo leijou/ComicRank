@@ -1,7 +1,7 @@
 <?php
 namespace ComicRank\Model;
 
-class User extends StoredObject
+class User extends ActiveRecord
 {
     protected static $table = 'users';
     protected static $table_fields = array(
@@ -24,6 +24,15 @@ class User extends StoredObject
     {
         if (!$email) return false;
         return static::getSingleFromSQL('SELECT * FROM users WHERE email = :email', array(':email'=>$email));
+    }
+
+    public function getComics()
+    {
+        if ($this->admin) {
+            return Comic::getFromSQL('SELECT * FROM comics ORDER BY readers DESC');
+        } else {
+            return Comic::getFromUserId($this->id);
+        }
     }
 
     protected function set($field, $value)

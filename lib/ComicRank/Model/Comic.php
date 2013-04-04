@@ -1,19 +1,20 @@
 <?php
 namespace ComicRank\Model;
 
-class Comic extends StoredObject
+class Comic extends ActiveRecord
 {
     protected static $table = 'comics';
     protected static $table_fields = array(
-        'id'      => array('string', null),
-        'added'   => array('time',   null),
-        'user'    => array('string', null),
-        'url'     => array('string', '',),
-        'title'   => array('string', '',),
-        'nsfw'    => array('bool',   0),
-        'public'  => array('bool',   1),
-        'readers' => array('int',    0),
-        'guests'  => array('int',    0),
+        'id'            => array('string', null),
+        'added'         => array('time',   null),
+        'user'          => array('string', null),
+        'url'           => array('string', '',),
+        'title'         => array('string', '',),
+        'nsfw'          => array('bool',   0),
+        'public'        => array('bool',   1),
+        'readers'       => array('int',    0),
+        'dailyvisitors' => array('int',    0),
+        'dailyreaders'  => array('int',    0),
     );
     protected static $table_primarykey = array('id');
 
@@ -23,7 +24,7 @@ class Comic extends StoredObject
         return static::getSingleFromSQL('SELECT * FROM comics WHERE id = :id', array(':id'=>$id));
     }
 
-    public static function getFromUser($user)
+    public static function getFromUserId($user)
     {
         if (!$user) return false;
         return static::getFromSQL('SELECT * FROM comics WHERE user = :user', array(':user'=>$user));

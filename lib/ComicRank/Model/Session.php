@@ -1,7 +1,7 @@
 <?php
 namespace ComicRank\Model;
 
-class Session extends StoredObject
+class Session extends ActiveRecord
 {
     protected static $table = 'sessions';
     protected static $table_fields = array(
@@ -24,7 +24,7 @@ class Session extends StoredObject
         return static::getSingleFromSQL('SELECT * FROM sessions WHERE `key` = :key AND `expires` > UTC_TIMESTAMP()', array(':key'=>sha1($key)));
     }
 
-    public static function getFromUser($user)
+    public static function getFromUserId($user)
     {
         if (!$user) return false;
         return static::getFromSQL('SELECT * FROM sessions WHERE user = :user AND `expires` > UTC_TIMESTAMP()', array(':user'=>$user));

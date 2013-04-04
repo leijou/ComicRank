@@ -1,7 +1,7 @@
 <?php
 namespace ComicRank\Model;
 
-class Mailing extends StoredObject
+class Mailing extends ActiveRecord
 {
     protected static $table = 'mailing';
     protected static $table_fields = array(

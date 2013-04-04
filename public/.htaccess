@@ -9,29 +9,27 @@ RewriteRule ^view/([0-9]+).(png|gif|jpg|blank)$ http://view.comicrank.com/1/0.$2
 RewriteRule ^([0-9]+)/in/?$ / [R=301,L]
 RewriteRule ^([0-9]+)/?$ - [G,L]
 RewriteRule ^(panel|top50|recent|movers) - [G,L]
-
-
+RewriteRule ^(about|contact|terms)\.php$ /$1 [R=301,L]
 
 # New ComicRank site
 AddDefaultCharset UTF-8
+ErrorDocument 403 /error/403
+ErrorDocument 404 /error/404
+ErrorDocument 410 /error/410
+ErrorDocument 500 /error/500
+ErrorDocument 503 /error/503
 
-ErrorDocument 403 /rewrite/error.php?code=403
-ErrorDocument 404 /rewrite/error.php?code=404
-ErrorDocument 410 /rewrite/error.php?code=410
-ErrorDocument 500 /rewrite/error.php?code=500
-ErrorDocument 503 /rewrite/error.php?code=503
-
+# Block git directory
 RewriteRule \.git - [F,L]
 
-RewriteRule ^comic/([0-9a-z]{4})/?$ /rewrite/comic/index.php?id=$1 [L]
+# Cache files in static forever, cache-busting on each release
+RewriteRule ^static/\:[0-9a-z]+/(.*)$ static/$1
+SetEnvIf Request_URI "^/static/" staticcache
+Header set Cache-Control "max-age=31104000, public" env=staticcache
+
+# For now button links just redirect to home
 RewriteRule ^comic/([0-9a-z]{4})/in/?$ / [R=302,L]
-RewriteRule ^comic/([0-9a-z]{4})/stats/?$ /rewrite/comic/stats.php?id=$1 [L]
-RewriteRule ^comic/([0-9a-z]{4})/code/?$ /rewrite/comic/code.php?id=$1 [L]
-RewriteRule ^comic/([0-9a-z]{4})/(.+)/?$ /rewrite/comic/index.php?id=$1&title=$2 [L]
 
-RewriteRule ^user/([0-9a-z]{4})/?$ /rewrite/user/index.php?id=$1 [L]
-RewriteRule ^user/([0-9a-z]{4})/edit/?$ /rewrite/user/edit.php?id=$1 [L]
-RewriteRule ^user/([0-9a-z]{4})/(.+)/?$ /rewrite/user/index.php?id=$1&name=$2 [L]
-
-RewriteRule ^mailing/?$ /rewrite/mailing/index.php [L]
-RewriteRule ^mailing/([0-9a-z]{5,})/?$ /rewrite/mailing/manage.php?token=$1 [L]
+# All requests filter through index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L]
