@@ -28,7 +28,10 @@
             var chart = new google.visualization.ComboChart(document.getElementById('chart_div<?=$view['comic']->id?>'));
             chart.draw(data, {
                 chartArea: {width: '100%'},
-                hAxis: {format:'MMM d', viewWindowMode: 'maximized'},
+                hAxis: {format:'MMM d', viewWindowMode: 'explicit', viewWindow: {
+                    min: new Date((new Date()).getTime()-(6*7*24*60*60*1000)),
+                    max: new Date((new Date()).getTime()-(24*60*60*1000))}
+                },
                 vAxis: {textPosition: 'in'},
                 seriesType: "area",
                 series: {
