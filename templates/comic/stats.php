@@ -29,8 +29,9 @@
             chart.draw(data, {
                 chartArea: {width: '100%'},
                 hAxis: {format:'MMM d', viewWindowMode: 'explicit', viewWindow: {
-                    min: new Date((new Date()).getTime()-(6*7*24*60*60*1000)),
-                    max: new Date((new Date()).getTime()-(24*60*60*1000))}
+                        min: new Date(<?=date('Y', time()-(6*7*24*60*60))?>, <?=(date('m', time()-(6*7*24*60*60))-1)?>, <?=date('d', time()-(6*7*24*60*60))?>),
+                        max: new Date(<?=date('Y')?>, <?=(date('m')-1)?>, <?=date('d')?>)
+                    }
                 },
                 vAxis: {textPosition: 'in'},
                 seriesType: "area",
