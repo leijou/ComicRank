@@ -1,4 +1,20 @@
 
+    <?php
+    if ( ($view['comic']->readers == 0) && ($view['comic']->dailyvisitors == 0) ) {
+        ?>
+        <section class="sectionbox">
+            <header>
+                <h1>Your comic has been added!</h1>
+            </header>
+
+            <div class="sectionfull">
+                <p>Please follow the instructions below to add the Comic Rank button to your site so that we can start tracking your readers. Within a few hours of putting on your site your first visitors will start showing up on your user panel.</p>
+            </div>
+        </section>
+        <?php
+    }
+    ?>
+
         <section class="sectionbox">
             <header>
                 <h1>Code: <?=$view['comic']->title('html')?></h1>
