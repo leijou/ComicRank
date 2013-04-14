@@ -159,6 +159,12 @@ abstract class ActiveRecord
                 if (!$value instanceof \DateTime) throw new \InvalidArgumentException('Value for date must be a DateTime instance');
                 $value = $value->format('Y-m-d');
                 break;
+
+            default:
+                if (is_array(static::$table_fields[$field][self::FIELD_FORMAT])) {
+                    if (!in_array($value, static::$table_fields[$field][self::FIELD_FORMAT])) throw new \InvalidArgumentException('Value for enum must be a defined value');
+                }
+                break;
         }
 
         $this->field_container[$field] = $value;
@@ -170,7 +176,15 @@ abstract class ActiveRecord
     public function validate() {
         $this->validation_errors = array();
 
-        return true;
+        foreach (static::$table_fields as $field => $details) {
+            if (is_array($details[self::FIELD_FORMAT])) {
+                if (!in_array($value, static::$table_fields[$field][self::FIELD_FORMAT])) {
+                    $this->validation_errors[$field] = 'Value for enum must be a defined value';
+                }
+            }
+        }
+
+        return !count($this->validation_errors);
     }
 
     /**
