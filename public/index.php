@@ -40,6 +40,7 @@ switch ($url) {
     case 'about':
     case 'contact':
     case 'terms':
+    case 'inkexport.json':
     case 'comic/add':
     case 'user/login':
     case 'user/logout':

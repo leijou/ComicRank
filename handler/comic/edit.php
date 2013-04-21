@@ -15,7 +15,7 @@ if ( (!$page->getSessionUser()) || ( ($page->getSessionUser()->id != $comic->use
     $page->exitPageDisplay(403, 'comic/403');
 }
 
-$page->title = 'Code: '.$comic->title;
+$page->title = 'Edit: '.$comic->title;
 
 $errors = array();
 $completions = array();
@@ -29,7 +29,20 @@ if (isset($_POST['title'])) {
         if ($comic->validate()) {
             $comic->update();
 
-            $page->exitRedirect('/comic/'.$comic->id('url').'/'.$comic->title('url'));
+            $completions['comic'] = 'Comic details updated';
+        } else {
+            $errors = $comic->validation_errors;
+        }
+    }
+} elseif (isset($_POST['inkid'])) {
+    if ( (!isset($_POST['csrf'])) || ($_POST['csrf'] != $page->getRFPKey()) ) {
+        $errors['csrf'] = 'Missing or invalid security token. Please try again.';
+    } else {
+        $comic->inkid = $_POST['inkid'];
+
+        if ($comic->validate()) {
+            $comic->update();
+            $completions['inkid'] = 'inkOUTBREAK updated';
         } else {
             $errors = $comic->validation_errors;
         }
