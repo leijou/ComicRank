@@ -15,7 +15,7 @@ class Comic extends ActiveRecord
         'readers'       => array('int',    0),
         'dailyvisitors' => array('int',    0),
         'dailyreaders'  => array('int',    0),
-        'inkid'         => array('string', null),
+        'inkid'         => array('string', ''),
     );
     protected static $table_primarykey = array('id');
 
